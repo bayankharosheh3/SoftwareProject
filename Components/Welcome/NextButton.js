@@ -2,6 +2,7 @@ import { StyleSheet, Text, View , TouchableOpacity} from 'react-native'
 import React ,{useRef,useEffect}from 'react'
 import {AntDesign} from '@expo/vector-icons'
 
+
 const NextButton = ({scrollTo}) => {
   return (
     <View>

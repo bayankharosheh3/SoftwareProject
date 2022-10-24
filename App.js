@@ -1,14 +1,20 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
-import Splash from "./Components/WelcomePage/Splash";
-import OnBoarding from "./Components/WelcomePage/OnBoarding"
 import { StatusBar } from "expo-status-bar";
+//
+import Splash from "./Components/Welcome/Splash";
+import OnBoarding from "./Components/Welcome/OnBoarding";
+import HomeScreen from "./Components/Home/HomeScreen";
 
 const App = () => (
-  <View style={styles.container}>
-    <OnBoarding/>
-    <StatusBar style="auto"/>
-  </View>
+  <>
+    <StatusBar
+      backgroundColor={"#63b885" + "30"}
+      barStyle="dark-content"
+      animated={true}
+    />
+    <HomeScreen />
+  </>
 );
 
 const styles = StyleSheet.create({
