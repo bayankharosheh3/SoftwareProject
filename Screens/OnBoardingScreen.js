@@ -1,11 +1,10 @@
 import React, { useState, useRef } from "react";
 import { StyleSheet, View, FlatList, Animated } from "react-native";
 
-import OnBoardingItem from "./OnBoardingItem";
-import Paginator from "./Paginator";
-import NextButton from "./NextButton";
-
-import slides from "./../../assets/data/slides";
+import OnBoardingItem from "../Components/OnBoardingItem";
+import Paginator from "../Components/Paginator";
+import NextButton from "../Components/NextButton";
+import slides from "./../assets/data/slides";
 
 export default OnBoarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,17 +47,30 @@ export default OnBoarding = () => {
           ref={slidesRef}
         />
       </View>
-      <Paginator data={slides} scrollX={scrollX} />
-      <NextButton scrollTo={scrollTo} />
+      <View style={styles.btnContainer}>
+        <Paginator data={slides} scrollX={scrollX} />
+        <NextButton scrollTo={scrollTo} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    width:'100%',
     flex: 1,
-    backgroundColor: "#63b885",
-    alignItems: "center",
-    justifyContent: "center",
+    // backgroundColor: "#63b885",
+    alignItems:"center",
+    justifyContent:'center'
   },
+  btnContainer:{
+    width:'80%',
+    // flex:.53,
+    flexDirection:'row',
+    alignItems:'flex-end',
+    justifyContent: "space-between",
+    // borderColor: "red",
+    // borderWidth: 2,
+    paddingBottom:35,
+  }
 });
