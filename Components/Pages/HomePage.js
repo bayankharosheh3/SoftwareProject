@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { SIZES } from "../constants";
+import { SIZES } from "../../assets/constants";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import {
   FlatList,
   TextInput,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import homepageCards from "../../../assets/data/homepageCards";
+import homepageCards from "../../assets/data/homepageCards";
 const HomePage = () => {
   const Card = (card) => {
     return (
@@ -26,14 +26,14 @@ const HomePage = () => {
         }}
       >
         <Image
-          source={card.cardIcon}
+          source={require("./../../assets/images/1.png")}
           style={{
             width: "100%",
             resizeMode: "cover",
             flex: 1,
           }}
         />
-        <Text>{card.cardTitle}</Text>
+        <Text>{card.cardTitle}ok</Text>
       </TouchableOpacity>
     );
   };
@@ -56,14 +56,14 @@ const HomePage = () => {
           <TextInput placeholder="Search" style={{ flex: 1 }} />
         </View>
       </View>
-      <Text
+      {/* <Text
         style={{
           paddingHorizontal: 20,
           paddingVertical: 30,
         }}
       >
-        {homepageCards[1].cardTitle}
-      </Text>
+     {homepageCards[1].cardTitle} 
+      </Text> */}
 
       <FlatList
         data={homepageCards}

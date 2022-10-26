@@ -2,10 +2,9 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomePage, ChatPage, AppointmentsPage, ProfilePage } from "../screens";
-import { Doctors, Clinics } from "../Cards";
+import { HomePage, ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
-import { COLORS } from "../constants";
+import { COLORS } from "./../assets/constants";
 
 const Stack = createStackNavigator();
 
@@ -38,7 +37,7 @@ const BottomTabNavigator = () => {
           return (
             <FontAwesome5Icons
               name={icons[route.name]}
-              color={focused ? COLORS.accent : COLORS.black}
+              color={focused ? COLORS.Main : COLORS.black}
               style={{
                 marginTop: 8,
                 fontSize: 22,
@@ -70,7 +69,11 @@ const BottomTabNavigator = () => {
         },
       })}
     >
-      <Tab.Screen name="HomePage" component={StackNavigator} options={{headerShown: false}}/>
+      <Tab.Screen
+        name="HomePage"
+        component={StackNavigator}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="ChatPage" component={ChatPage} />
       <Tab.Screen name="AppointmentsPage" component={AppointmentsPage} />
       <Tab.Screen name="ProfilePage" component={ProfilePage} />

@@ -1,7 +1,7 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { SplashScreen, OnBoardingScreen } from "./Screens";
+import { SplashScreen, OnBoardingScreen, HomeScreen } from "./Screens";
 import { useState, useEffect } from "react";
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -13,7 +13,12 @@ const App = () => {
     }, 10000);
   }, []);
 
-  return <View style={styles.container}>{changeScreen ? <OnBoardingScreen /> : <SplashScreen />}</View>;
+  return (
+    <View style={styles.container}>
+      {/* {changeScreen ? <OnBoardingScreen /> : <SplashScreen />} */}
+      <HomeScreen />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
