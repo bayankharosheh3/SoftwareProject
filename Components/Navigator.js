@@ -5,16 +5,46 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomePage, ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "./../assets/constants";
+import MessagesPage from "./Pages/MessagesPage";
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName={"HomePage"} headerMode="none">
-      <Stack.Screen name="ok" component={HomePage} />
+    <Stack.Navigator
+      initialRouteName={"HomePage"}
+      options={{ headerShown: false }}
+    >
+      <Stack.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
+
+const MessageStack = ({ navigation }) => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Messages"
+      component={MessagesPage}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Chat"
+      component={ChatPage}
+      options={({ route }) => ({
+        title: route.params.userName,
+        headerBackTitleVisible: false,
+      })}
+      // options={({ route }) => ({
+      //   title: route.params.userName,
+      //   headerBackTitleVisible: false,
+      // })}
+    />
+  </Stack.Navigator>
+);
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -30,7 +60,7 @@ const BottomTabNavigator = () => {
         tabBarIcon: ({ focused }) => {
           const icons = {
             HomePage: "home",
-            ChatPage: "comment-medical",
+            MessagesPage: "comment-medical",
             AppointmentsPage: "calendar-alt",
             ProfilePage: "user-alt",
           };
@@ -74,7 +104,11 @@ const BottomTabNavigator = () => {
         component={StackNavigator}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="ChatPage" component={ChatPage} />
+      <Tab.Screen
+        name="MessagesPage"
+        component={MessageStack}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="AppointmentsPage" component={AppointmentsPage} />
       <Tab.Screen name="ProfilePage" component={ProfilePage} />
     </Tab.Navigator>

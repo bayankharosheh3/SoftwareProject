@@ -9,8 +9,9 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 import homepageCards from "../../assets/data/homepageCards";
+import PageHeader from "../PageHeader";
 const HomePage = () => {
-  const Card = (card) => {
+  const Card = ({ card }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
@@ -26,14 +27,14 @@ const HomePage = () => {
         }}
       >
         <Image
-          source={require("./../../assets/images/1.png")}
+          source={card.cardIcon}
           style={{
             width: "100%",
             resizeMode: "cover",
             flex: 1,
           }}
         />
-        <Text>{card.cardTitle}ok</Text>
+        <Text>{card.cardTitle}</Text>
       </TouchableOpacity>
     );
   };
@@ -45,7 +46,9 @@ const HomePage = () => {
         barStyle={"dark-content"}
         animated={true}
       />
-      <View style={styles.header}>
+
+      <PageHeader title={"Home Page"}/>
+      {/* <View style={styles.header}>
         <Text style={styles.title}>Home Page</Text>
         <View style={styles.searchContainer}>
           <FontAwesome5Icon
@@ -55,7 +58,7 @@ const HomePage = () => {
           />
           <TextInput placeholder="Search" style={{ flex: 1 }} />
         </View>
-      </View>
+      </View> */}
       {/* <Text
         style={{
           paddingHorizontal: 20,
