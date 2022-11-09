@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { COLORS } from "../assets/constants";
 
@@ -6,6 +6,10 @@ const LogoutAlert = () => {
   return (
     <View style={styles.container}>
       <View style={styles.confirmMassage}>
+        <Image
+          style={styles.imgLogout}
+          source={require("../assets/images/logout.jpg")}
+        ></Image>
         <View style={styles.text}>
           <Text style={styles.logoutWord}>Log out?</Text>
           <Text style={styles.question}>Are you sure you want to log-out?</Text>
@@ -40,9 +44,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  imgLogout: {
+    width: 200,
+    height: 200,
+    marginBottom: 40,
+  },
+
   text: {
     flex: 0.3,
     alignItems: "center",
+    marginBottom: 60,
   },
   logoutWord: {
     fontSize: 24,
