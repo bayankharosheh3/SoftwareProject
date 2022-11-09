@@ -6,6 +6,8 @@ import { HomePage, ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "./../assets/constants";
 import MessagesPage from "./Pages/MessagesPage";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import NotificationsPage from "./Pages/NotificationsPage";
 
 const Stack = createStackNavigator();
 
@@ -24,27 +26,52 @@ const StackNavigator = () => {
   );
 };
 
-const MessageStack = ({ navigation }) => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Messages"
-      component={MessagesPage}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Chat"
-      component={ChatPage}
-      options={({ route }) => ({
-        title: route.params.userName,
-        headerBackTitleVisible: false,
-      })}
-      // options={({ route }) => ({
-      //   title: route.params.userName,
-      //   headerBackTitleVisible: false,
-      // })}
-    />
-  </Stack.Navigator>
-);
+const MessageStack = ({ navigation, route }) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Messages"
+        component={MessagesPage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={ChatPage}
+        options={({ route }) => {
+          console.log(route.name);
+          return {
+            title: route.params.userName,
+            headerBackTitleVisible: false,
+          };
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ProfileStack = ({ navigation, route }) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={ProfilePage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsPage}
+        options={{
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+            // height:120,
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -108,9 +135,18 @@ const BottomTabNavigator = () => {
         name="MessagesPage"
         component={MessageStack}
         options={{ headerShown: false }}
+        // options={({ route }) => console.log(route)}
       />
-      <Tab.Screen name="AppointmentsPage" component={AppointmentsPage} />
-      <Tab.Screen name="ProfilePage" component={ProfilePage} />
+      <Tab.Screen
+        name="AppointmentsPage"
+        component={AppointmentsPage}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="ProfilePage"
+        component={ProfileStack}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   );
 };

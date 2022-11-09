@@ -30,6 +30,7 @@ export default PageHeader;
 const styles = StyleSheet.create({
   header: {
     width: "100%",
+    flex:.2,
     height: 0.17 * SIZES.height,
     padding: 30,
     backgroundColor: "#63b885",

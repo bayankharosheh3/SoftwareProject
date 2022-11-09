@@ -1,9 +1,9 @@
 import OnBoardingScreen from "./OnBoardingScreen"
 import SplashScreen from "./SplashScreen"
-import HomeScreen from "./HomeScreen"
+import MainScreen from "./MainScreen"
  
 export {
     SplashScreen,
     OnBoardingScreen,
-    HomeScreen,
+    MainScreen,
 }

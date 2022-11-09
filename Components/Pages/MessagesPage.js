@@ -5,51 +5,55 @@ import {
   TouchableOpacity,
   View,
   Image,
+  FlatList,
 } from "react-native";
 import React from "react";
 import PageHeader from "../PageHeader";
-import { FlatList } from "react-native-gesture-handler";
+// import { FlatList } from "react-native-gesture-handler";
 import messages from "../../assets/data/messages";
 
 const MessagesPage = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.mainContainer}>
       <PageHeader title={"Chat"} />
-      {/* <Button
+
+      <View style={styles.container}>
+        {/* <Button
         title="click"
         onPress={() => navigation.navigate("Chat")}
       ></Button> */}
-      <FlatList
-        data={messages}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate('Chat', { userName: item.userName })
-            }
-          >
-            <View style={styles.userInfo}>
-              <View style={styles.userImgWrapper}>
-                <Image
-                  style={styles.userImg}
-                  source={require("../../assets/images/1.png")}
-                />
-              </View>
-              <View style={styles.textSection}>
-                <View style={styles.userInfoText}>
-                  <Text style={styles.userName}>{item.userName}</Text>
-                  <Text style={styles.postTime}>{item.messageTime}</Text>
+        <FlatList
+          data={messages}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() =>
+                navigation.navigate("Chat", { userName: item.userName })
+              }
+            >
+              <View style={styles.userInfo}>
+                <View style={styles.userImgWrapper}>
+                  <Image
+                    style={styles.userImg}
+                    source={require("../../assets/images/1.png")}
+                  />
                 </View>
-                <Text style={styles.messageText}>{item.messageText}</Text>
+                <View style={styles.textSection}>
+                  <View style={styles.userInfoText}>
+                    <Text style={styles.userName}>{item.userName}</Text>
+                    <Text style={styles.postTime}>{item.messageTime}</Text>
+                  </View>
+                  <Text style={styles.messageText}>{item.messageText}</Text>
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
-          //   <View>
-          //     <Text>{item.userName}</Text>
-          //   </View>
-        )}
-      />
+            </TouchableOpacity>
+            //   <View>
+            //     <Text>{item.userName}</Text>
+            //   </View>
+          )}
+        />
+      </View>
     </View>
   );
 };
@@ -57,6 +61,11 @@ const MessagesPage = ({ navigation }) => {
 export default MessagesPage;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+  },
   container: {
     flex: 1,
     width: "100%",
