@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { COLORS } from "../assets/constants";
 
-const LogoutAlert = () => {
+const LogoutAlert = ({ fun }) => {
   return (
     <View style={styles.container}>
       <View style={styles.confirmMassage}>
@@ -17,7 +17,12 @@ const LogoutAlert = () => {
         <TouchableOpacity style={styles.logoutBtn}>
           <Text style={styles.logoutBtnText}>LOG OUT</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.cancelBtn}>
+        <TouchableOpacity
+          style={styles.cancelBtn}
+          onPress={() => {
+            fun("none");
+          }}
+        >
           <Text style={styles.cancelBtnText}>CANCEL</Text>
         </TouchableOpacity>
       </View>
@@ -31,13 +36,13 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     flex: 1,
-    backgroundColor: "#b2b2b3",
+    backgroundColor: "#00000070",
     alignItems: "center",
     paddingTop: 120,
   },
   confirmMassage: {
     backgroundColor: "white",
-    flex: 0.7,
+    flex: 0.8,
     width: "90%",
     borderRadius: 15,
     alignItems: "center",

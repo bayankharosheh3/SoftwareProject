@@ -26,9 +26,9 @@ const App = () => {
     <View style={styles.mainContainer}>
       <SafeAreaView style={styles.container}>
         {/* {changeScreen ? <OnBoardingScreen /> : <SplashScreen />} */}
-        {/* <MainScreen /> */}
+        <MainScreen />
         {/* <ProfilePage/> */}
-        <LogoutAlert/>
+        {/* <LogoutAlert/> */}
       </SafeAreaView>
     </View>
   );

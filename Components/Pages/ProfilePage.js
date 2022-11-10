@@ -11,8 +11,11 @@ import React from "react";
 import { COLORS } from "../../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import messages from "../../assets/data/messages";
+import LogoutAlert from "../LogoutAlert";
+import { useState } from "react";
 
 const ProfilePage = ({ navigation }) => {
+  const [show, setShow] = useState("none");
   // console.log(navigation.navigate('Notifications'))
   return (
     <View style={styles.mainContainer}>
@@ -55,13 +58,13 @@ const ProfilePage = ({ navigation }) => {
               <Text style={styles.tabDesc}>Saved {"\n"}Doctor</Text>
             </View>
             <View style={styles.tab}>
-              <View style={styles.iconView}>
+              <View style={styles.iconFile}>
                 <FontAwesome5Icons name="file" style={styles.icon} />
               </View>
               <Text style={styles.tabDesc}>Saved {"\n"}Doctor</Text>
             </View>
             <View style={styles.tab}>
-              <View style={styles.iconView}>
+              <View style={styles.iconHeart}>
                 <FontAwesome5Icons name="heart" style={styles.icon} />
               </View>
               <Text style={styles.tabDesc}>Health{"\n"} Diary</Text>
@@ -73,7 +76,11 @@ const ProfilePage = ({ navigation }) => {
             data={messages}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setShow("flex");
+                }}
+              >
                 <View style={styles.listItem}>
                   <View style={styles.containerItem}>
                     <View style={styles.itemIconView}>
@@ -93,6 +100,16 @@ const ProfilePage = ({ navigation }) => {
             )}
           />
         </View>
+      </View>
+      <View
+        style={{
+          display: show,
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+        }}
+      >
+        <LogoutAlert fun={setShow} />
       </View>
     </View>
   );
@@ -156,7 +173,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderBottomColor: "#edf1f7",
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 1,
   },
   infoContainer: {
     width: "90%",
@@ -173,10 +190,10 @@ const styles = StyleSheet.create({
   imgProfile: {
     width: 80,
     height: 80,
-    borderRadius: "50%",
+    borderRadius: 50,
   },
   userName: {
-    fontSize: 24,
+    fontSize: 22,
     paddingBottom: 2,
   },
   age: {
@@ -190,7 +207,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderBottomColor: "#edf1f7",
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 1,
   },
 
   tabsContainer: {
@@ -208,7 +225,26 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.Main,
     width: 60,
     height: 60,
-    borderRadius: "50%",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+
+  iconFile: {
+    backgroundColor: "#00a5ff",
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  iconHeart: {
+    backgroundColor: "#6574cf",
+    width: 60,
+    height: 60,
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
@@ -231,7 +267,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderBottomColor: "#edf1f7",
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 1,
     height: 80,
   },
   containerItem: {
@@ -246,7 +282,7 @@ const styles = StyleSheet.create({
     // flex: 0.3,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: "3px",
+    borderRadius: 3,
     width: 50,
     height: 50,
     backgroundColor: "#f3f4fb",
