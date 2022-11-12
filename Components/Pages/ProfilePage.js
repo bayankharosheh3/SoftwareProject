@@ -13,6 +13,9 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import messages from "../../assets/data/messages";
 import LogoutAlert from "../LogoutAlert";
 import { useState } from "react";
+import EditAccountConfirm from "../EditAccountConfirm";
+import ChangePassword from "../ChangePassword";
+import SuccessAlert from "../SuccessAlert";
 
 const ProfilePage = ({ navigation }) => {
   const [show, setShow] = useState("none");
@@ -77,9 +80,10 @@ const ProfilePage = ({ navigation }) => {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={() => {
-                  setShow("flex");
-                }}
+                // onPress={() => {
+                //   setShow("flex");
+                // }}
+                onPress={() => navigation.navigate("EditAccountPage")}
               >
                 <View style={styles.listItem}>
                   <View style={styles.containerItem}>
@@ -109,7 +113,7 @@ const ProfilePage = ({ navigation }) => {
           position: "absolute",
         }}
       >
-        <LogoutAlert fun={setShow} />
+        {/* <SuccessAlert fun={setShow} /> */}
       </View>
     </View>
   );

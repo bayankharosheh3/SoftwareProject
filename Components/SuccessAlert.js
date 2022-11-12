@@ -2,35 +2,32 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { COLORS } from "../assets/constants";
 
-const LogoutAlert = ({ fun }) => {
+const SuccessAlert = ({ fun }) => {
   return (
     <View style={styles.container}>
       <View style={styles.confirmMassage}>
         <Image
           style={styles.imgLogout}
-          source={require("../assets/images/logout.jpg")}
+          source={require("../assets/images/success.jpg")}
         ></Image>
         <View style={styles.text}>
-          <Text style={styles.logoutWord}>Log out?</Text>
-          <Text style={styles.question}>Are you sure you want to log-out?</Text>
+          <Text style={styles.logoutWord}>Success!</Text>
+          <Text style={styles.question}>The password is changed</Text>
         </View>
-        <TouchableOpacity style={styles.logoutBtn}>
-          <Text style={styles.logoutBtnText}>LOG OUT</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.cancelBtn}
           onPress={() => {
             fun("none");
           }}
         >
-          <Text style={styles.cancelBtnText}>CANCEL</Text>
+          <Text style={styles.cancelBtnText}>GOT IT</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default LogoutAlert;
+export default SuccessAlert;
 
 const styles = StyleSheet.create({
   container: {
@@ -66,28 +63,19 @@ const styles = StyleSheet.create({
   },
   cancelBtn: {
     width: "80%",
-    borderColor: COLORS.Main,
-    borderWidth: 2,
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  logoutBtn: {
-    width: "80%",
     backgroundColor: COLORS.Main,
     borderColor: COLORS.Main,
     borderWidth: 2,
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
-    marginBottom: 15,
   },
   logoutBtnText: {
-    fontSize:14,
-    textTransform:'uppercase',
+    fontSize: 14,
+    textTransform: "uppercase",
     color: "white",
   },
   cancelBtnText: {
-    color: COLORS.Main,
+    color: "white",
   },
 });
