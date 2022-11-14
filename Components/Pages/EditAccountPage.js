@@ -16,7 +16,6 @@ import { useRef } from "react";
 
 const EditAccountPage = () => {
   const [permission, setPermission] = useState(null);
-  const [img, setImg] = useState(null);
   const [edit, setEdit] = useState(false);
   const [info, setInfo] = useState({
     firstName: "Bayan",

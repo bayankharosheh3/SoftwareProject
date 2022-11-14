@@ -87,7 +87,7 @@ const ProfilePage = ({ navigation }) => {
                 // onPress={() => {
                 //   setShow("flex");
                 // }}
-                onPress={() => navigation.navigate("EditAccountPage")}
+                onPress={() => navigation.navigate("MedicalFilesPage")}
               >
                 <View style={styles.listItem}>
                   <View style={styles.containerItem}>
