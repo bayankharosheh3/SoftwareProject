@@ -32,7 +32,11 @@ const ProfilePage = ({ navigation }) => {
             >
               <FontAwesome5Icons name="bell" style={styles.titleIcon} />
             </TouchableOpacity>
-            <FontAwesome5Icons name="cog" style={styles.titleIcon} />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SupportingPage")}
+            >
+              <FontAwesome5Icons name="cog" style={styles.titleIcon} />
+            </TouchableOpacity>
           </View>
         </View>
       </View>

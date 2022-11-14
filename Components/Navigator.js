@@ -9,6 +9,7 @@ import MessagesPage from "./Pages/MessagesPage";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import NotificationsPage from "./Pages/NotificationsPage";
 import EditAccountPage from "./Pages/EditAccountPage";
+import SupportingPage from "./Pages/SupportingPage";
 
 const Stack = createStackNavigator();
 
@@ -73,6 +74,18 @@ const ProfileStack = ({ navigation, route }) => {
       <Stack.Screen
         name="EditAccountPage"
         component={EditAccountPage}
+        options={{
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+            // height:120,
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="SupportingPage"
+        component={SupportingPage}
         options={{
           headerBackTitleVisible: false,
           headerStyle: {
