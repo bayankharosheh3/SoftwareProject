@@ -12,6 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS } from "./assets/constants";
 import { ProfilePage } from "./Components/Pages";
 import LogoutAlert from "./Components/LogoutAlert";
+import DoctorProfilePage from "./Components/Pages/DoctorProfilePage";
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
 
@@ -29,7 +30,7 @@ const App = () => {
         {/* <MainScreen /> */}
         {/* <ProfilePage/> */}
         {/* <LogoutAlert/> */}
-        <OnBoarding/>
+        <DoctorProfilePage/>
       </SafeAreaView>
     </View>
   );
