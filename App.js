@@ -13,6 +13,7 @@ import { COLORS } from "./assets/constants";
 import { ProfilePage } from "./Components/Pages";
 import LogoutAlert from "./Components/LogoutAlert";
 import DoctorProfilePage from "./Components/Pages/DoctorProfilePage";
+import BookingSuccessPage from "./Components/Pages/BookingSuccessPage";
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
 
@@ -20,28 +21,23 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setChangeScreen(true);
-    }, 10000);
+    }, 2000);
   }, []);
 
   return (
     <View style={styles.mainContainer}>
-      <SafeAreaView style={styles.container}>
-        {/* {changeScreen ? <OnBoardingScreen /> : <SplashScreen />} */}
-        {/* <MainScreen /> */}
-        {/* <ProfilePage/> */}
-        {/* <LogoutAlert/> */}
-        <DoctorProfilePage/>
-      </SafeAreaView>
+      <StatusBar />
+      {changeScreen ? <OnBoardingScreen /> : <SplashScreen />}
+      {/* <MainScreen /> */}
+      {/* <ProfilePage/> */}
+      {/* <LogoutAlert/> */}
+      {/* <DoctorProfilePage/> */}
+      {/* <BookingSuccessPage/> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   mainContainer: {
     width: "100%",
     height: "100%",
