@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../assets/constants";
 
@@ -14,7 +14,11 @@ const NextButton = ({ scrollTo }) => {
         <View style={styles.container}>
           <Text style={styles.txt}>next</Text>
           <View style={styles.arrow}>
-            <AntDesign name="arrowright" size={12} color="#fff" />
+            <AntDesign
+              name="arrowright"
+              size={12}
+              color={COLORS.FontColorWithBackground}
+            />
           </View>
         </View>
       </TouchableOpacity>
@@ -26,11 +30,10 @@ export default NextButton;
 
 const styles = StyleSheet.create({
   btn: {
-    // position:'absolute',
     backgroundColor: COLORS.Main,
     borderRadius: 7,
     padding: 20,
-    paddingVertical:14,
+    paddingVertical: 14,
   },
   container: {
     flexDirection: "row",
@@ -43,10 +46,10 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     paddingRight: 10,
   },
-  arrow:{
-    borderColor:COLORS.white,
-    borderWidth:2,
-    borderRadius:100,
-    padding:2
-  }
+  arrow: {
+    borderColor: COLORS.white,
+    borderWidth: 2,
+    borderRadius: 100,
+    padding: 2,
+  },
 });

@@ -1,26 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, View, Animated, useWindowDimensions } from "react-native";
 import React from "react";
 import { COLORS } from "../assets/constants";
 
 const Paginator = ({ data, scrollX }) => {
   const { width } = useWindowDimensions();
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        // height: 64,
-        // height: "100%",
-        // borderColor: "red",
-        // borderWidth: 2,
-        // paddingTop:40
-      }}
-    >
+    <View style={styles.container}>
       {data.map((_, i) => {
         const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
         const dotWidth = scrollX.interpolate({
@@ -47,6 +32,9 @@ const Paginator = ({ data, scrollX }) => {
 export default Paginator;
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+  },
   dot: {
     height: 8,
     borderRadius: 5,

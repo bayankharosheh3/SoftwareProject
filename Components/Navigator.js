@@ -4,13 +4,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { HomePage, ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
-import { COLORS } from "./../assets/constants";
+import { COLORS } from "../assets/constants";
 import MessagesPage from "./Pages/MessagesPage";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import NotificationsPage from "./Pages/NotificationsPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import SupportingPage from "./Pages/SupportingPage";
-import MedicalFilesPage from "./Pages/MedicalFilesPage";
+import { OnBoardingScreen, SignInScreen } from "../Screens";
+import SignUpPatientScreen from "../Screens/SignUpPatientScreen";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const StackNavigator = () => {
         component={HomePage}
         options={{ headerShown: false }}
       />
+      
     </Stack.Navigator>
   );
 };

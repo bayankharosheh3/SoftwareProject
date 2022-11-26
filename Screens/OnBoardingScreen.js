@@ -1,15 +1,19 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, View, FlatList, Animated, Text } from "react-native";
-
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Animated,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import OnBoardingItem from "../Components/OnBoardingItem";
 import Paginator from "../Components/Paginator";
 import NextButton from "../Components/NextButton";
 import slides from "./../assets/data/slides";
-import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLORS } from "../assets/constants";
 
-export default OnBoarding = () => {
+export default OnBoarding = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
@@ -25,16 +29,23 @@ export default OnBoarding = () => {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
       //   console.log(currentIndex);
     } else {
-      console.log("last item");
+      navigation.navigate("SignInScreen");
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 3 }}>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.text}>Skip</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{ flex: 5 }}>
         <FlatList
           data={slides}
-          renderItem={({ item }) => <OnBoardingItem item={item} />}
+          renderItem={({ item }) => (
+            <OnBoardingItem item={item} navigation={navigation} />
+          )}
           horizontal
           showsHorizontalScrollIndicator
           pagingEnabled
@@ -54,140 +65,7 @@ export default OnBoarding = () => {
         <Paginator data={slides} scrollX={scrollX} />
         <NextButton scrollTo={scrollTo} />
       </View>
-      {/* <View
-        style={{
-          width: "100%",
-          backgroundColor: "#000000b0",
-          position: "absolute",
-          bottom: 0,
-          height: "100%",
-        }}
-      >
-        <View
-          style={{
-            width: "100%",
-            position: "absolute",
-            bottom: 0,
-            height: "30%",
-            backgroundColor: "white",
-            borderTopLeftRadius: 50,
-            borderTopRightRadius: 50,
-            alignItems: "center",
-            // justifyContent: "center",
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#8f9bb3",
-              width: 40,
-              height: 5,
-              borderRadius: 4,
-              marginTop:15,
-              marginBottom:30,
-            }}
-          />
-          <View
-            style={{
-              width: "90%",
-              // alignItems: "center",
-              flex: 0.7,
-            }}
-          >
-            <Text
-              style={{
-                textTransform: "capitalize",
-                fontSize: 18,
-                fontWeight: "600",
-                padding: 10,
-                marginBottom: 10,
-                textAlign: "center",
-              }}
-            >
-              how would you sign up?
-            </Text>
-            <TouchableOpacity style={{ marginBottom: 10, width: "100%" }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: "100%",
-                  padding: 10,
-                  alignItems: "center",
-                }}
-              >
-                <FontAwesome5Icon
-                  name="user-md"
-                  style={{
-                    fontSize: 26,
-                    paddingRight: 20,
-                    color: COLORS.Main,
-                  }}
-                />
-                <View>
-                  <Text
-                    style={{
-                      textTransform: "capitalize",
-                      fontSize: 14,
-                      fontWeight: "500",
-                      width: "100%",
-                    }}
-                  >
-                    doctor
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      width: "100%",
-                      color: "#8f9bb3",
-                    }}
-                  >
-                    Connect with your patients immediately.
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ marginBottom: 10, width: "100%" }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  width: "100%",
-                  padding: 10,
-                  alignItems: "center",
-                }}
-              >
-                <FontAwesome5Icon
-                  name="user"
-                  style={{
-                    fontSize: 24,
-                    paddingRight: 20,
-                    color: COLORS.Main,
-                  }}
-                />
-                <View>
-                  <Text
-                    style={{
-                      textTransform: "capitalize",
-                      fontSize: 14,
-                      fontWeight: "500",
-                      width: "100%",
-                    }}
-                  >
-                    patient
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      width: "100%",
-                      color: "#8f9bb3",
-                    }}
-                  >
-                    Easiest way to book appointment with favorite doctor.
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View> */}
+
     </View>
   );
 };
@@ -199,6 +77,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+    backgroundColor: COLORS.Background,
+  },
+  buttonContainer: {
+    width: "80%",
+    flex: 0.18,
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+  button: {
+    paddingTop: 50,
+    alignItems: "center",
+    justifyContent: "center",
   },
   btnContainer: {
     width: "80%",

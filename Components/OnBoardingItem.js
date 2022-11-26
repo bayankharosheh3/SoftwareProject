@@ -4,23 +4,22 @@ import {
   View,
   useWindowDimensions,
   Image,
-  Pressable,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
-
-import exampleImage from "./../assets/images/1.jpg";
 import { COLORS } from "../assets/constants";
 
-const OnBoardingItem = ({ item }) => {
+const OnBoardingItem = ({ item, navigation }) => {
   const { width } = useWindowDimensions();
-  console.log(exampleImage + "0");
-
   return (
     <View style={[styles.container, { width }]}>
       <View style={styles.buttonContainer}>
-        <Pressable style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("SignInScreen")}
+        >
           <Text style={styles.text}>Skip</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{item.title}</Text>
@@ -39,9 +38,7 @@ export default OnBoardingItem;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ffffff",
-    // borderColor: "blue",
-    // borderWidth: 5,
+    backgroundColor: COLORS.Background,
     alignItems: "center",
   },
   buttonContainer: {
@@ -49,11 +46,9 @@ const styles = StyleSheet.create({
     flex: 0.18,
     alignItems: "flex-end",
     justifyContent: "center",
-    // borderColor: "red",
-    // borderWidth: 2,
   },
   button: {
-    paddingTop:50,
+    paddingTop: 50,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -61,15 +56,11 @@ const styles = StyleSheet.create({
   textContainer: {
     width: "80%",
     flex: 0.25,
-    // borderColor: "red",
-    // borderWidth: 2,
     alignItems: "flex-start",
   },
   imgContainer: {
     flex: 0.6,
     width: "80%",
-    // borderColor: "red",
-    // borderWidth: 2,
   },
   image: {
     justifyContent: "center",
@@ -83,18 +74,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: COLORS.Main,
     textAlign: "center",
-    textTransform:'capitalize',
+    textTransform: "capitalize",
   },
   subTitle: {
     fontWeight: "300",
-    color: "#000000",
+    color: COLORS.FontColorNoBackground,
     marginBottom: 10,
     fontSize: 28,
-    textTransform:'capitalize',
+    textTransform: "capitalize",
   },
   description: {
     fontWeight: "300",
-    color: "#000000",
+    color: COLORS.FontColorNoBackground,
     marginBottom: 10,
   },
 });
