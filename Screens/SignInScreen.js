@@ -27,7 +27,7 @@ function SignInScreen({ navigation }) {
       signInWith.password === "1234" &&
       signInWith.email === "bayan@gmail.com"
     ) {
-      navigation.navigate("MainScreen")
+      navigation.navigate("Home")
     }
   };
 

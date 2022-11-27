@@ -10,7 +10,18 @@ import {
 } from "react-native-gesture-handler";
 import homepageCards from "../../assets/data/homepageCards";
 import PageHeader from "../PageHeader";
-const HomePage = () => {
+import { useLayoutEffect } from "react";
+
+const HomePage = ({navigation}) => {
+  useLayoutEffect(() => {
+    const hideUnsubscribe = navigation.addListener("focus", (e) => {
+      let parentNav = navigation.getParent();
+      parentNav.setOptions({
+        tabBarStyle: {display: "flex" },
+      });
+    });
+  },[]);
+
   const Card = ({ card }) => {
     return (
       <TouchableOpacity
@@ -47,7 +58,7 @@ const HomePage = () => {
         animated={true}
       />
 
-      <PageHeader title={"Home Page"}/>
+      <PageHeader title={"Home Page"} />
       {/* <View style={styles.header}>
         <Text style={styles.title}>Home Page</Text>
         <View style={styles.searchContainer}>

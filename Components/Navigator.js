@@ -10,26 +10,45 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import NotificationsPage from "./Pages/NotificationsPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import SupportingPage from "./Pages/SupportingPage";
-import { OnBoardingScreen, SignInScreen } from "../Screens";
+import { MainScreen, OnBoardingScreen, SignInScreen } from "../Screens";
 import SignUpPatientScreen from "../Screens/SignUpPatientScreen";
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator
-      initialRouteName={"HomePage"}
-      options={{ headerShown: false }}
-    >
-      <Stack.Screen
+    <Stack.Navigator initialRouteName={"OnBoardingScreen"}>
+      {/* <Stack.Screen
         name="HomePage"
         component={HomePage}
         options={{ headerShown: false }}
+      /> */}
+
+      <Stack.Screen
+        name="OnBoardingScreen"
+        component={OnBoardingScreen}
+        options={{ headerShown: false }}
       />
-      
+      <Stack.Screen
+        name="SignInScreen"
+        component={SignInScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignUpPatientScreen"
+        component={SignUpPatientScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={HomePage}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
+
+// export default StackNavigator;
 
 const MessageStack = ({ navigation, route }) => {
   return (

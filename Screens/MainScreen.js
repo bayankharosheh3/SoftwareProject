@@ -4,6 +4,7 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import BottomTabNavigator from "../Components/Navigator";
 import { COLORS } from "../assets/constants";
+import StackNavigator from "../Components/Navigator";
 
 const HomeScreen = () => {
   return (

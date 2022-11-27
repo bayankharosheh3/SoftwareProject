@@ -4,8 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import { useState, useEffect } from "react";
 
 // screens
-import ScreensNavigation from "./Screens/ScreensNavigation";
 import { SplashScreen } from "./Screens";
+import HomeScreen from "./Screens/MainScreen";
 
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <View style={styles.mainContainer}>
       <StatusBar />
-      {changeScreen ? <ScreensNavigation /> : <SplashScreen />}
+      {changeScreen ? <HomeScreen /> : <SplashScreen />}
     </View>
   );
 };

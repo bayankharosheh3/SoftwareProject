@@ -12,8 +12,19 @@ import Paginator from "../Components/Paginator";
 import NextButton from "../Components/NextButton";
 import slides from "./../assets/data/slides";
 import { COLORS } from "../assets/constants";
+import { useLayoutEffect } from "react";
 
 export default OnBoarding = ({ navigation }) => {
+
+  useLayoutEffect(() => {
+    const hideUnsubscribe = navigation.addListener('focus', e => {
+      let parentNav = navigation.getParent();
+      parentNav.setOptions({
+        tabBarStyle: {display: 'none'},
+      });
+    });
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
