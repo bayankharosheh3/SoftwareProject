@@ -25,124 +25,127 @@ function SignUpPatientScreen({ navigation }) {
     password: "",
   });
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ScrollView style={styles.container}>
-        <View style={styles.container1}>
-          <View style={styles.container1_1}>
-            <Image
-              source={require("./../assets/images/login_logo.png")}
-              style={styles.logo}
-            />
+    <>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView style={styles.container}>
+          <View style={styles.container1}>
+            <View style={styles.container1_1}>
+              <Image
+                source={require("./../assets/images/login_logo.png")}
+                style={styles.logo}
+              />
+            </View>
+            <View style={styles.container1_2}>
+              <Text style={styles.logintext}>Sign Up</Text>
+              <Text style={styles.logindiscreption}>
+                Please enter your credentials
+              </Text>
+            </View>
           </View>
-          <View style={styles.container1_2}>
-            <Text style={styles.logintext}>Sign Up</Text>
-            <Text style={styles.logindiscreption}>
-              Please enter your credentials
-            </Text>
-          </View>
-        </View>
 
-        <View style={styles.container2}>
-          <View style={styles.container2_1}>
-            <Text style={styles.credentials}>Name</Text>
+          <View style={styles.container2}>
+            <View style={styles.container2_1}>
+              <Text style={styles.credentials}>Name</Text>
+            </View>
+            <View style={styles.container2_2}>
+              <TextInput
+                placeholder={"Name"}
+                style={styles.input}
+                value={signUpWith.name}
+                onChangeText={(text) => {
+                  setSignUpWith({ ...signUpWith, name: text });
+                }}
+              />
+            </View>
+            <View style={styles.container2_1}>
+              <Text style={styles.credentials}>Email</Text>
+            </View>
+            <View style={styles.container2_2}>
+              <TextInput
+                placeholder={"Email"}
+                style={styles.input}
+                value={signUpWith.email}
+                onChangeText={(text) => {
+                  setSignUpWith({ ...signUpWith, email: text });
+                }}
+              />
+            </View>
+            <View style={styles.container2_1}>
+              <Text style={styles.credentials}>Mobile Number</Text>
+            </View>
+            <View style={styles.container2_2}>
+              <TextInput
+                placeholder={" Mobile Number"}
+                style={styles.input}
+                keyboardType="numeric"
+                value={signUpWith.phone}
+                onChangeText={(text) => {
+                  setSignUpWith({ ...signUpWith, phone: text });
+                }}
+              />
+            </View>
+            <View style={styles.container2_1}>
+              <Text style={styles.credentials}>Password</Text>
+            </View>
+            <View style={styles.container2_2}>
+              <TextInput
+                placeholder={"Password"}
+                secureTextEntry={true}
+                style={styles.input}
+                value={signUpWith.password}
+                onChangeText={(text) => {
+                  setSignUpWith({ ...signUpWith, password: text });
+                }}
+              />
+            </View>
           </View>
-          <View style={styles.container2_2}>
-            <TextInput
-              placeholder={"Name"}
-              style={styles.input}
-              value={signUpWith.name}
-              onChangeText={(text) => {
-                setSignUpWith({ ...signUpWith, name: text });
-              }}
-            />
-          </View>
-          <View style={styles.container2_1}>
-            <Text style={styles.credentials}>Email</Text>
-          </View>
-          <View style={styles.container2_2}>
-            <TextInput
-              placeholder={"Email"}
-              style={styles.input}
-              value={signUpWith.email}
-              onChangeText={(text) => {
-                setSignUpWith({ ...signUpWith, email: text });
-              }}
-            />
-          </View>
-          <View style={styles.container2_1}>
-            <Text style={styles.credentials}>Mobile Number</Text>
-          </View>
-          <View style={styles.container2_2}>
-            <TextInput
-              placeholder={" Mobile Number"}
-              style={styles.input}
-              keyboardType="numeric"
-              value={signUpWith.phone}
-              onChangeText={(text) => {
-                setSignUpWith({ ...signUpWith, phone: text });
-              }}
-            />
-          </View>
-          <View style={styles.container2_1}>
-            <Text style={styles.credentials}>Password</Text>
-          </View>
-          <View style={styles.container2_2}>
-            <TextInput
-              placeholder={"Password"}
-              secureTextEntry={true}
-              style={styles.input}
-              value={signUpWith.password}
-              onChangeText={(text) => {
-                setSignUpWith({ ...signUpWith, password: text });
-              }}
-            />
-          </View>
-        </View>
 
-        <View View style={styles.container2_2}>
-          <Text style={styles.error}>{error}</Text>
-        </View>
+          <View View style={styles.container2_2}>
+            <Text style={styles.error}>{error}</Text>
+          </View>
 
-        <View style={styles.container3}>
-          <TouchableOpacity
-            style={styles.signUpBtn}
-            onPress={() => {
-              if (
-                signUpWith.name === "" ||
-                signUpWith.email === "" ||
-                signUpWith.phone === "" ||
-                signUpWith.password === ""
-              ) {
-                setError("error,fill all inputs please");
-              } else {
-                setShow(true);
-                console.log(signUpWith);
-                setError("");
-              }
-            }}
-          >
-            <Text style={styles.signUp}>Sign up</Text>
-          </TouchableOpacity>
-          <View style={styles.row}>
-            <Text>have an account? </Text>
+          <View style={styles.container3}>
             <TouchableOpacity
-              onPress={() => navigation.replace("SignInScreen")}
+              style={styles.signUpBtn}
+              onPress={() => {
+                if (
+                  signUpWith.name === "" ||
+                  signUpWith.email === "" ||
+                  signUpWith.phone === "" ||
+                  signUpWith.password === ""
+                ) {
+                  setError("error,fill all inputs please");
+                } else {
+                  setShow(true);
+                  console.log(signUpWith);
+                  setError("");
+                }
+              }}
             >
-              <Text style={styles.link}>Sign in</Text>
+              <Text style={styles.signUp}>Sign up</Text>
             </TouchableOpacity>
+            <View style={styles.row}>
+              <Text>have an account? </Text>
+              <TouchableOpacity
+                onPress={() => navigation.replace("SignInScreen")}
+              >
+                <Text style={styles.link}>Sign in</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View style={[styles.container4, { display: show ? "flex" : "none" }]}>
-          <SignUpAlert fun={setShow} fun2={setSignUpWith} />
-        </View>
-      </ScrollView>
-    </TouchableWithoutFeedback>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+      <View style={[styles.container4, { display: show ? "flex" : "none" }]}>
+        <SignUpAlert fun={setShow} fun2={setSignUpWith} />
+      </View>
+    </>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    height: "100%",
     backgroundColor: COLORS.Background,
     position: "relative",
   },
@@ -239,6 +242,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   container4: {
+    flex: 1,
     width: "100%",
     height: "100%",
     position: "absolute",
