@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState, useCallback, useEffect } from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "../ScreenHeader";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import { COLORS } from "../../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
@@ -20,7 +20,7 @@ const ChatPage = ({ route, navigation }) => {
           name: "React Native",
           avatar: "https://placeimg.com/140/140/any",
         },
-        image: 'https://facebook.github.io/react/img/logo_og.png',
+        image: "https://facebook.github.io/react/img/logo_og.png",
       },
       {
         _id: 2,

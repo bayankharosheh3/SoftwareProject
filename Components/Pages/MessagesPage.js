@@ -8,7 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import React from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "../ScreenHeader";
 // import { FlatList } from "react-native-gesture-handler";
 import messages from "../../assets/data/messages";
 

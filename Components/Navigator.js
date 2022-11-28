@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomePage, ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
+import { ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "../assets/constants";
 import MessagesPage from "./Pages/MessagesPage";
@@ -10,7 +10,13 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import NotificationsPage from "./Pages/NotificationsPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import SupportingPage from "./Pages/SupportingPage";
-import { OnBoardingScreen, SignInScreen, SignUpPatientScreen } from "../Screens";
+import {
+  ClinicsScreen,
+  HomeScreen,
+  OnBoardingScreen,
+  SignInScreen,
+  SignUpPatientScreen,
+} from "../Screens";
 
 const Stack = createStackNavigator();
 
@@ -22,7 +28,6 @@ const StackNavigator = () => {
         component={HomePage}
         options={{ headerShown: false }}
       /> */}
-
       <Stack.Screen
         name="OnBoardingScreen"
         component={OnBoardingScreen}
@@ -40,8 +45,22 @@ const StackNavigator = () => {
       />
       <Stack.Screen
         name="Home"
-        component={HomePage}
+        component={HomeScreen}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Clinics"
+        component={ClinicsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+            display: "none",
+          },
+          headerTitleStyle: {
+            color: COLORS.FontColorWithBackground,
+          },
+          headerTintColor: COLORS.FontColorWithBackground,
+        }}
       />
     </Stack.Navigator>
   );
