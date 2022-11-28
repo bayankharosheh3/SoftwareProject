@@ -1,26 +1,39 @@
 import React from "react";
+import { useState } from "react";
 import {
   StyleSheet,
-  Button,
   TextInput,
-  Image,
   View,
   Text,
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
-// import login_logo from "./../../assets/images/login_logo.png";
-function SignUpPatientScreen(props) {
+import { COLORS } from "../assets/constants";
+import { SignUpAlert } from "../Components";
+
+function SignUpPatientScreen({ navigation }) {
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
+
+  const [signUpWith, setSignUpWith] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ScrollView style={styles.container}>
         <View style={styles.container1}>
           <View style={styles.container1_1}>
-            {/* <Image source={login_logo} style={styles.logo} /> */}
+            <Image
+              source={require("./../assets/images/login_logo.png")}
+              style={styles.logo}
+            />
           </View>
-
           <View style={styles.container1_2}>
             <Text style={styles.logintext}>Sign Up</Text>
             <Text style={styles.logindiscreption}>
@@ -33,57 +46,94 @@ function SignUpPatientScreen(props) {
           <View style={styles.container2_1}>
             <Text style={styles.credentials}>Name</Text>
           </View>
-
           <View style={styles.container2_2}>
-            <TextInput placeholder={"Name"} style={styles.input} />
+            <TextInput
+              placeholder={"Name"}
+              style={styles.input}
+              value={signUpWith.name}
+              onChangeText={(text) => {
+                setSignUpWith({ ...signUpWith, name: text });
+              }}
+            />
           </View>
-
           <View style={styles.container2_1}>
             <Text style={styles.credentials}>Email</Text>
           </View>
-
           <View style={styles.container2_2}>
-            <TextInput placeholder={"Email"} style={styles.input} />
+            <TextInput
+              placeholder={"Email"}
+              style={styles.input}
+              value={signUpWith.email}
+              onChangeText={(text) => {
+                setSignUpWith({ ...signUpWith, email: text });
+              }}
+            />
           </View>
           <View style={styles.container2_1}>
             <Text style={styles.credentials}>Mobile Number</Text>
           </View>
-
           <View style={styles.container2_2}>
             <TextInput
               placeholder={" Mobile Number"}
               style={styles.input}
               keyboardType="numeric"
+              value={signUpWith.phone}
+              onChangeText={(text) => {
+                setSignUpWith({ ...signUpWith, phone: text });
+              }}
             />
           </View>
-
           <View style={styles.container2_1}>
             <Text style={styles.credentials}>Password</Text>
           </View>
-
           <View style={styles.container2_2}>
             <TextInput
               placeholder={"Password"}
               secureTextEntry={true}
               style={styles.input}
+              value={signUpWith.password}
+              onChangeText={(text) => {
+                setSignUpWith({ ...signUpWith, password: text });
+              }}
             />
           </View>
         </View>
 
+        <View View style={styles.container2_2}>
+          <Text style={styles.error}>{error}</Text>
+        </View>
+
         <View style={styles.container3}>
-          <View
-            style={[{ width: "90%", margin: 10, backgroundColor: "#7BC89C" }]}
+          <TouchableOpacity
+            style={styles.signUpBtn}
+            onPress={() => {
+              if (
+                signUpWith.name === "" ||
+                signUpWith.email === "" ||
+                signUpWith.phone === "" ||
+                signUpWith.password === ""
+              ) {
+                setError("error,fill all inputs please");
+              } else {
+                setShow(true);
+                console.log(signUpWith);
+                setError("");
+              }
+            }}
           >
-            <Button title="Sign in" color="#7BC89C" />
-          </View>
+            <Text style={styles.signUp}>Sign up</Text>
+          </TouchableOpacity>
           <View style={styles.row}>
             <Text>have an account? </Text>
             <TouchableOpacity
-              onPress={() => navigation.replace("RegisterScreen")}
+              onPress={() => navigation.replace("SignInScreen")}
             >
               <Text style={styles.link}>Sign in</Text>
             </TouchableOpacity>
           </View>
+        </View>
+        <View style={[styles.container4, { display: show ? "flex" : "none" }]}>
+          <SignUpAlert fun={setShow} fun2={setSignUpWith} />
         </View>
       </ScrollView>
     </TouchableWithoutFeedback>
@@ -92,33 +142,34 @@ function SignUpPatientScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     width: "100%",
-
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.Background,
+    position: "relative",
   },
   container1: {
-    flex: 1,
+    flex: 0.3,
     width: "100%",
-    backgroundColor: "#7BC89C",
+    backgroundColor: COLORS.Main,
   },
   container1_1: {
-    flex: 2,
+    flex: 0.5,
     alignItems: "flex-start",
     justifyContent: "flex-start",
     paddingLeft: "5%",
     paddingTop: "15%",
-    backgroundColor: "#7BC89C",
+    paddingBottom: 10,
+    marginBottom: 10,
   },
   container1_2: {
     flex: 1,
-    backgroundColor: "#7BC89C",
     paddingLeft: 20,
+    paddingBottom: 10,
   },
   container2: {
-    flex: 1,
+    flex: 0.5,
     width: "100%",
-    backgroundColor: "#fff",
+    marginBottom: "7%",
+    marginTop: "3%",
   },
   container2_1: {
     alignItems: "flex-start",
@@ -131,49 +182,39 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
   },
   container3: {
-    flex: 1,
+    flex: 0.2,
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-start",
-    backgroundColor: "#fff",
   },
-
   credentials: {
-    color: "#666967",
+    color: COLORS.FontColorNoBackground,
     fontSize: 15,
   },
   input: {
     width: "90%",
     height: 44,
     padding: 10,
-    borderWidth: 0.2,
-    borderColor: "#b8dec7",
+    borderBottomColor: COLORS.InputBorder,
+    borderBottomWidth: 0.5,
     marginBottom: 10,
-    backgroundColor: "#f7faf9",
+    backgroundColor: COLORS.InputBackground,
   },
   link: {
     fontWeight: "bold",
-    color: "#7BC89C",
+    color: COLORS.Main,
   },
-  login_button: {
-    height: 44,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#7BC89C",
-    marginBottom: 10,
-    backgroundColor: "#7BC89C",
-  },
+
   logintext: {
-    color: "white",
+    color: COLORS.FontColorWithBackground,
     fontSize: 30,
     //  fontFamily: 'Arial',
     fontWeight: "bold",
   },
   logindiscreption: {
-    color: "white",
+    color: COLORS.FontColorWithBackground,
     fontSize: 15,
   },
   logo: {
@@ -183,6 +224,27 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     marginTop: 4,
+  },
+
+  signUpBtn: {
+    backgroundColor: COLORS.Main,
+    width: "90%",
+    margin: 10,
+    borderRadius: 7,
+    padding: 13,
+  },
+  signUp: {
+    color: COLORS.FontColorWithBackground,
+    textAlign: "center",
+    fontSize: 16,
+  },
+  container4: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+  },
+  error: {
+    color: "red",
   },
 });
 

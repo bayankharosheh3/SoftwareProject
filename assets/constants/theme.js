@@ -11,6 +11,8 @@ export const COLORS = {
   black: "#171717",
   white: "#FFFFFF",
   poUpBackground: "#000000b0",
+  InputBackground: "#f7faf9",
+  InputBorder: "#b8dec7",
 };
 
 export const SIZES = {

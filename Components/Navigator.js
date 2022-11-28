@@ -10,8 +10,7 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import NotificationsPage from "./Pages/NotificationsPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import SupportingPage from "./Pages/SupportingPage";
-import { MainScreen, OnBoardingScreen, SignInScreen } from "../Screens";
-import SignUpPatientScreen from "../Screens/SignUpPatientScreen";
+import { OnBoardingScreen, SignInScreen, SignUpPatientScreen } from "../Screens";
 
 const Stack = createStackNavigator();
 

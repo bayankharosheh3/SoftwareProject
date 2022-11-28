@@ -12,22 +12,27 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 import { COLORS } from "../assets/constants";
 import login_logo from "./../assets/images/login_logo.png";
 
 function SignInScreen({ navigation }) {
   const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
   const [signInWith, setSignInWith] = useState({
     email: "",
     password: "",
   });
 
   const signInAction = () => {
-    if (
+    if (signInWith.email === "" || signInWith.password === "") {
+      setError("error,fill all inputs please");
+    } else if (
       signInWith.password === "1234" &&
       signInWith.email === "bayan@gmail.com"
     ) {
-      navigation.navigate("Home")
+      console.log(signInWith);
+      navigation.navigate("Home");
     }
   };
 
@@ -53,6 +58,7 @@ function SignInScreen({ navigation }) {
             <TextInput
               placeholder={"Email"}
               style={styles.input}
+              value={signInWith.email}
               onChangeText={(text) => {
                 setSignInWith({ ...signInWith, email: text });
               }}
@@ -66,11 +72,15 @@ function SignInScreen({ navigation }) {
               placeholder={"Password"}
               secureTextEntry={true}
               style={styles.input}
+              value={signInWith.password}
               onChangeText={(text) => {
                 setSignInWith({ ...signInWith, password: text });
               }}
             />
           </View>
+        </View>
+        <View View style={styles.container2_2}>
+          <Text style={styles.error}>{error}</Text>
         </View>
         <View style={styles.container3}>
           <TouchableOpacity
@@ -181,7 +191,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 0.2,
     marginBottom: 10,
-    backgroundColor: "#f7faf9",
+    backgroundColor: COLORS.InputBackground,
+    borderWidth: 0,
+    borderBottomColor: COLORS.InputBorder,
+    borderBottomWidth: 0.5,
   },
   link: {
     fontWeight: "bold",
@@ -196,13 +209,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.Main,
   },
   logintext: {
-    color: "white",
+    color: COLORS.FontColorWithBackground,
     fontSize: 30,
     //  fontFamily: 'Arial',
     fontWeight: "bold",
   },
   logindiscreption: {
-    color: "white",
+    color: COLORS.FontColorWithBackground,
     fontSize: 15,
   },
   logo: {
@@ -218,7 +231,7 @@ const styles = StyleSheet.create({
     width: "90%",
     margin: 10,
     borderRadius: 7,
-    padding: 15,
+    padding: 13,
   },
   signIn: {
     color: COLORS.FontColorWithBackground,
@@ -284,6 +297,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     width: "100%",
     color: COLORS.DetailsColor,
+  },
+  error: {
+    color: "red",
   },
 });
 
