@@ -5,6 +5,7 @@ import SignInScreen from "./SignInScreen";
 import SignUpPatientScreen from "./SignUpPatientScreen";
 import HomeScreen from "./HomeScreen";
 import ClinicsScreen from "./ClinicsScreen";
+import ClinicDoctorsScreen from "./ClinicDoctorsScreen";
 export {
   SplashScreen,
   OnBoardingScreen,
@@ -13,4 +14,5 @@ export {
   SignUpPatientScreen,
   HomeScreen,
   ClinicsScreen,
+  ClinicDoctorsScreen,
 };

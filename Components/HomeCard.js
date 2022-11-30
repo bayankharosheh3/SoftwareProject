@@ -1,6 +1,6 @@
-import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { SIZES } from "../assets/constants";
+import { COLORS, SIZES } from "../assets/constants";
 
 const HomeCard = ({ navigation, card }) => {
   return (
@@ -9,8 +9,11 @@ const HomeCard = ({ navigation, card }) => {
       style={styles.container}
       onPress={() => navigation.navigate(card.cardScreen)}
     >
-      <Image source={card.cardIcon} style={styles.imgCard} />
-      <Text>{card.cardTitle}</Text>
+      <View style={styles.imgContainer}>
+        <Image source={card.cardIcon} style={styles.imgCard} />
+      </View>
+      <Text style={{width:'100%'}}>{card.cardTitle}</Text>
+      <Text style={styles.sub}>{card.cardSubTitle}</Text>
     </TouchableOpacity>
   );
 };
@@ -20,17 +23,32 @@ export default HomeCard;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    width: 0.47 * SIZES.width - 35,
+    width: 0.5 * SIZES.width - 35,
     margin: 10,
-    height: 140,
+    height: 155,
     borderRadius: 10,
     padding: 15,
     shadowColor: "#9e9898",
     elevation: 5,
+    alignItems:'center',
+  },
+  imgContainer:{
+    width:'60%',
+    flex:4.5,
+    backgroundColor: COLORS.InputBackground,
+    alignItems:'center',
+    justifyContent:'center',
+    marginBottom:10,
   },
   imgCard: {
-    width: "100%",
+    width: "160%",
     resizeMode: "cover",
     flex: 1,
+  },
+  sub: {
+    fontSize: 11,
+    width: "100%",
+    marginBottom: 4,
+    color: COLORS.DetailsColor,
   },
 });

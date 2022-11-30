@@ -15,13 +15,6 @@ const ClinicSearchBar = ({
           clicked ? styles.searchBar__clicked : styles.searchBar__unclicked
         }
       >
-        {/* search Icon */}
-        <Feather
-          name="search"
-          size={20}
-          color="white"
-          style={{ marginRight: 1 }}
-        />
         {/* Input field */}
         <TextInput
           style={styles.input}
@@ -30,6 +23,14 @@ const ClinicSearchBar = ({
           onChangeText={setSearchPhrase}
           color="white"
         />
+        {/* search Icon */}
+        <Feather
+          name="search"
+          size={20}
+          color="white"
+          style={{ marginRight: 7 }}
+        />
+
         {/* cross Icon, depending on whether the search bar is clicked or not */}
         {clicked && (
           <Entypo
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#fff",
     alignItems: "center",
+    justifyContent: "space-between",
   },
   searchBar__clicked: {
     padding: 5,
@@ -77,8 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   input: {
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 10,
-    width: "100%",
   },
 });

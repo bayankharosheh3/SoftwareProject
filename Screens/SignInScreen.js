@@ -28,11 +28,14 @@ function SignInScreen({ navigation }) {
     if (signInWith.email === "" || signInWith.password === "") {
       setError("error,fill all inputs please");
     } else if (
-      signInWith.password === "1234" &&
-      signInWith.email === "bayan@gmail.com"
+      signInWith.password === "1" &&
+      signInWith.email === "1"
     ) {
       console.log(signInWith);
       navigation.navigate("Home");
+    }
+    else{
+      setError("Wrong Password or Email");
     }
   };
 
@@ -158,7 +161,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   container2: {
-    flex: 0.8,
+    flex: 0.7,
     width: "100%",
     backgroundColor: COLORS.Background,
   },
@@ -176,7 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.Background,
   },
   container3: {
-    flex: 1,
+    flex: 1.1,
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-start",

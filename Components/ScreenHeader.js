@@ -12,8 +12,8 @@ const ScreenHeader = ({ title, desc = "Search" }) => {
         <TextInput placeholder={desc} style={{ flex: 1 }} />
         <FontAwesome5Icon
           name="search"
-          size={22}
-          style={{ marginHorizontal: 20 }}
+          size={20}
+          style={{ marginHorizontal: 10 , color:COLORS.FontColorWithBackground}}
         />
       </View>
     </View>
@@ -37,14 +37,22 @@ const styles = StyleSheet.create({
     color: "white",
   },
   searchContainer: {
-    backgroundColor: COLORS.InputBackground,
+    padding: 5,
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    height: 50,
+    width: "100%",
+    backgroundColor: "#95d3af",
     borderRadius: 5,
-    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: COLORS.Background,
+    alignItems: "center",
+    // backgroundColor: COLORS.InputBackground,
+    // flexDirection: "row",
+    // alignItems: "center",
+    // justifyContent: "flex-start",
+    // height: 50,
+    // borderRadius: 5,
+    // backgroundColor: "white",
     marginVertical: 15,
-    paddingLeft: 20,
+    paddingLeft: 15,
   },
 });

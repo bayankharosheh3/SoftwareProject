@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import star from "../assets/images/star.png";
 import greenarrow from "../assets/images/greenarrow.png";
+import { COLORS } from "../assets/constants";
 // definition of the Item, which will be rendered in the FlatList
 const Item = ({ name, details }) => (
   <View style={styles.item}>
@@ -105,14 +106,16 @@ export default ClinicList;
 
 const styles = StyleSheet.create({
   list__container: {
-    margin: 10,
+    padding: 10,
     height: "100%",
     width: "100%",
   },
   item: {
-    margin: 30,
+    marginVertical: 10,
     borderBottomWidth: 2,
     borderBottomColor: "lightgrey",
+    paddingHorizontal:10,
+    paddingBottom:20,
   },
   title: {
     fontSize: 20,
@@ -124,10 +127,11 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
     alignItems: "center",
     backgroundColor: "#ffffff",
+    marginVertical: 7,
   },
   card: {
     width: "100%",
@@ -139,15 +143,19 @@ const styles = StyleSheet.create({
   rateinfo: {
     flexDirection: "row",
     justifyContent: "space-between",
+    backgroundColor: COLORS.InputBackground,
+    paddingHorizontal: 5,
+    paddingVertical:2,
+    borderRadius:5,
   },
   userImgWrapper: {
     paddingTop: 15,
     paddingBottom: 15,
   },
   userImg: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   },
   textSection: {
     flexDirection: "column",
@@ -156,8 +164,6 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     marginLeft: 10,
     width: 300,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
   },
   userInfoText: {
     flexDirection: "row",
@@ -174,16 +180,18 @@ const styles = StyleSheet.create({
     color: "#7BC89C",
     fontWeight: "bold",
     // fontFamily: "Lato-Regular",
+    paddingRight: 10,
   },
   specialty: {
     fontSize: 14,
     color: "#949494",
   },
   rateimage: {
-    width: 20,
-    height: 20,
+    width: 17,
+    height: 17,
   },
   arrowimg: {
-    paddingTop: 10,
+    paddingTop: 13,
+    paddingRight:0,
   },
 });

@@ -10,10 +10,9 @@ import Clinic_data from "../assets/data/Clinic_data";
 import { ClinicList, ClinicSearchBar } from "../Components";
 import { COLORS } from "../assets/constants";
 
-function ClinicsScreen({data}) {
+function ClinicDoctorsScreen(props) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
-  console.log(data+'100')
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   header: {
-    flex: .8,
+    flex: 0.8,
     width: "100%",
     backgroundColor: COLORS.Main,
   },
@@ -59,7 +58,6 @@ const styles = StyleSheet.create({
     flex: 8,
     width: "100%",
   },
-
 });
 
-export default ClinicsScreen;
+export default ClinicDoctorsScreen;
