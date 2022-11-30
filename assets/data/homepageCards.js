@@ -18,7 +18,7 @@ export default [
     cardTitle: "Bill",
     cardSubTitle: "All your bills",
     cardIcon: require("./../images/bills.png"),
-    cardScreen: "Clinics",
+    cardScreen: "BillScreen",
   },
   {
     id: "4",

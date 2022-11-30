@@ -6,6 +6,8 @@ import ScreenHeader from "./ScreenHeader";
 import HomeCard from "./HomeCard";
 import ClinicSearchBar from "./ClinicSearchBar";
 import ClinicList from "./ClinicList";
+import DoctorsSearchBar from "./DoctorsSearchBar";
+import DoctorsList from "./DoctorsList";
 export {
   OnBoardingItem,
   NextButton,
@@ -15,4 +17,6 @@ export {
   HomeCard,
   ClinicSearchBar,
   ClinicList,
+  DoctorsSearchBar,
+  DoctorsList,
 };

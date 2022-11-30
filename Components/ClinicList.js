@@ -12,15 +12,21 @@ import star from "../assets/images/star.png";
 import greenarrow from "../assets/images/greenarrow.png";
 import { COLORS } from "../assets/constants";
 // definition of the Item, which will be rendered in the FlatList
-const Item = ({ name, details }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{name}</Text>
-    <Text style={styles.details}>{details}</Text>
-  </View>
+const Item = ({ name, details, navigation }) => (
+  <TouchableOpacity
+    onPress={() => {
+      navigation.navigate("ClinicDoctors");
+    }}
+  >
+    <View style={styles.item}>
+      <Text style={styles.title}>{name}</Text>
+      <Text style={styles.details}>{details}</Text>
+    </View>
+  </TouchableOpacity>
 );
 
 // the filter
-const ClinicList = ({ searchPhrase, setCLicked, data }) => {
+const ClinicList = ({ searchPhrase, setCLicked, data, navigation }) => {
   const renderItem = ({ item }) => {
     // when no input, show all
     if (searchPhrase === "") {
@@ -28,11 +34,7 @@ const ClinicList = ({ searchPhrase, setCLicked, data }) => {
         <View style={styles.container0}>
           <TouchableOpacity
             style={styles.card}
-            onPress={() =>
-              navigation.navigate("clinic_doctors", {
-                userName: item.clinic_name,
-              })
-            }
+            onPress={() => navigation.navigate("ClinicDoctors")}
           >
             <View style={styles.userInfo}>
               <View style={styles.userImgWrapper}>
@@ -73,7 +75,13 @@ const ClinicList = ({ searchPhrase, setCLicked, data }) => {
         .toUpperCase()
         .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
     ) {
-      return <Item name={item.clinic_name} details={item.specialty} />;
+      return (
+        <Item
+          name={item.clinic_name}
+          details={item.specialty}
+          navigation={navigation}
+        />
+      );
     }
     // filter of the description
     if (
@@ -81,7 +89,13 @@ const ClinicList = ({ searchPhrase, setCLicked, data }) => {
         .toUpperCase()
         .includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))
     ) {
-      return <Item name={item.clinic_name} details={item.specialty} />;
+      return (
+        <Item
+          name={item.clinic_name}
+          details={item.specialty}
+          navigation={navigation}
+        />
+      );
     }
   };
 
@@ -114,8 +128,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderBottomWidth: 2,
     borderBottomColor: "lightgrey",
-    paddingHorizontal:10,
-    paddingBottom:20,
+    paddingHorizontal: 10,
+    paddingBottom: 20,
   },
   title: {
     fontSize: 20,
@@ -145,8 +159,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: COLORS.InputBackground,
     paddingHorizontal: 5,
-    paddingVertical:2,
-    borderRadius:5,
+    paddingVertical: 2,
+    borderRadius: 5,
   },
   userImgWrapper: {
     paddingTop: 15,
@@ -192,6 +206,6 @@ const styles = StyleSheet.create({
   },
   arrowimg: {
     paddingTop: 13,
-    paddingRight:0,
+    paddingRight: 0,
   },
 });

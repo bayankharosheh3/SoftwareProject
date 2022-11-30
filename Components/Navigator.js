@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -6,11 +6,11 @@ import { ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "../assets/constants";
 import MessagesPage from "./Pages/MessagesPage";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import NotificationsPage from "./Pages/NotificationsPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import SupportingPage from "./Pages/SupportingPage";
 import {
+  ClinicDoctorsScreen,
   ClinicsScreen,
   HomeScreen,
   OnBoardingScreen,
@@ -23,11 +23,6 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator initialRouteName={"OnBoardingScreen"}>
-      {/* <Stack.Screen
-        name="HomePage"
-        component={HomePage}
-        options={{ headerShown: false }}
-      /> */}
       <Stack.Screen
         name="OnBoardingScreen"
         component={OnBoardingScreen}
@@ -50,23 +45,59 @@ const StackNavigator = () => {
       />
       <Stack.Screen
         name="Clinics"
-        component={ClinicsScreen}
-        options={{
-          headerStyle: {
-            backgroundColor: COLORS.Main,
-            display: "none",
-          },
-          headerTitleStyle: {
-            color: COLORS.FontColorWithBackground,
-          },
-          headerTintColor: COLORS.FontColorWithBackground,
-        }}
+        component={ClinicsStack}
+        options={{ headerShown: false, tabBarStyle: { display: "none" } }}
       />
+      {/* <Stack.Screen
+        name="BillScreen"
+        component={BillScreen}
+        options={{ headerShown: false }}
+      /> */}
+
+      {/* BillScreen */}
     </Stack.Navigator>
   );
 };
 
 // export default StackNavigator;
+
+const ClinicsStack = ({ navigation, route }) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Clinics"
+        component={ClinicsScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+          },
+          headerTitleStyle: {
+            color: COLORS.FontColorWithBackground,
+          },
+          headerTintColor: COLORS.FontColorWithBackground,
+          headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="ClinicDoctors"
+        component={ClinicDoctorsScreen}
+        options={{
+          headerBackTitleVisible: false,
+        }}
+        //   options={({ route }) => {
+        //     console.log(route.name);
+        //     return {
+        //       title: route.params.userName,
+        //       headerBackTitleVisible: false,
+        //     };
+        //   }
+        // }
+      />
+    </Stack.Navigator>
+  );
+};
+
+// tabs
 
 const MessageStack = ({ navigation, route }) => {
   return (
@@ -164,7 +195,7 @@ const BottomTabNavigator = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused }) => {
           const icons = {
-            HomePage: "home",
+            HomeScreen: "home",
             MessagesPage: "comment-medical",
             AppointmentsPage: "calendar-alt",
             ProfilePage: "user-alt",
@@ -183,7 +214,7 @@ const BottomTabNavigator = () => {
         },
         tabBarLabel: ({ focused }) => {
           const labels = {
-            HomePage: "",
+            HomeScreen: "",
             ChatPage: "",
             AppointmentPage: "",
             ProfilePage: "",
@@ -205,7 +236,7 @@ const BottomTabNavigator = () => {
       })}
     >
       <Tab.Screen
-        name="HomePage"
+        name="HomeScreen"
         component={StackNavigator}
         options={{ headerShown: false }}
       />

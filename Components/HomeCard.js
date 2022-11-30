@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
     fontSize: 11,
     width: "100%",
     marginBottom: 4,
+    marginTop: 2,
+
     color: COLORS.DetailsColor,
   },
 });

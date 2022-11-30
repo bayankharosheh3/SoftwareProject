@@ -1,4 +1,4 @@
-import { StyleSheet, Text, SafeAreaView, Image } from "react-native";
+import { StyleSheet, Text, SafeAreaView, Image, View } from "react-native";
 import React from "react";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import homepageCards from "../assets/data/homepageCards";
@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.homeContainer}>
+    <View style={styles.homeContainer}>
       <ScreenHeader title={"Home Screen"} desc={"Search Doctors, Clinics"} />
       <FlatList
         data={homepageCards}
@@ -30,7 +30,7 @@ const HomeScreen = ({ navigation }) => {
           <HomeCard card={item} navigation={navigation} />
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: "100%",
-    height: 0.17 * SIZES.height,
+    height: 0.15 * SIZES.height,
     padding: 30,
     backgroundColor: "#63b885",
     position: "relative",
