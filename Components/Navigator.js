@@ -67,16 +67,24 @@ const ClinicsStack = ({ navigation, route }) => {
       <Stack.Screen
         name="Clinics"
         component={ClinicsScreen}
-        options={{
-          headerStyle: {
-            backgroundColor: COLORS.Main,
-          },
-          headerTitleStyle: {
-            color: COLORS.FontColorWithBackground,
-          },
-          headerTintColor: COLORS.FontColorWithBackground,
-          headerBackTitleVisible: false,
-        }}
+        options={
+          ({ route }) => {
+            console.log(route);
+            return {
+              // title: route.params.userName,
+            };
+          }
+          // {
+          //   headerStyle: {
+          //     backgroundColor: COLORS.Main,
+          //   },
+          //   headerTitleStyle: {
+          //     color: COLORS.FontColorWithBackground,
+          //   },
+          //   headerTintColor: COLORS.FontColorWithBackground,
+          //   headerBackTitleVisible: false,
+          // })
+        }
       />
       <Stack.Screen
         name="ClinicDoctors"
@@ -111,7 +119,7 @@ const MessageStack = ({ navigation, route }) => {
         name="Chat"
         component={ChatPage}
         options={({ route }) => {
-          console.log(route.name);
+          console.log(route);
           return {
             title: route.params.userName,
             headerBackTitleVisible: false,

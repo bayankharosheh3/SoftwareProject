@@ -11,7 +11,7 @@ export default [
     cardTitle: "Clinics",
     cardSubTitle: "All the clinics",
     cardIcon: require("./../images/clinics.png"),
-    cardScreen: "Clinics",
+    cardScreen: "ClinicStack",
   },
   {
     id: "3",

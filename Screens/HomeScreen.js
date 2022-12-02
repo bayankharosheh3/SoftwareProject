@@ -7,15 +7,6 @@ import { SIZES } from "../assets/constants";
 import { HomeCard, ScreenHeader } from "../Components";
 
 const HomeScreen = ({ navigation }) => {
-  useLayoutEffect(() => {
-    const hideUnsubscribe = navigation.addListener("focus", (e) => {
-      let parentNav = navigation.getParent();
-      parentNav.setOptions({
-        tabBarStyle: { display: "flex" },
-      });
-    });
-  }, []);
-
   return (
     <View style={styles.homeContainer}>
       <ScreenHeader title={"Home Screen"} desc={"Search Doctors, Clinics"} />

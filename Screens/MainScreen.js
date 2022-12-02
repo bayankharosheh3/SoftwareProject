@@ -2,13 +2,19 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import BottomTabNavigator from "../Components/Navigator";
+
+import { createStackNavigator } from "@react-navigation/stack";
+import { useState } from "react";
+import AuthStack from "../navigation/AuthStack";
+import TabNav from "../navigation/TabNav";
 
 const MainScreen = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <BottomTabNavigator />
+        {/* <BottomTabNavigator /> */}
+        {loggedIn ? <TabNav /> : <AuthStack setLoggedIn={setLoggedIn} />}
       </NavigationContainer>
     </View>
   );
@@ -22,4 +28,3 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 });
-

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { useState } from "react";
 import {
   StyleSheet,
@@ -16,127 +16,184 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import { COLORS } from "../assets/constants";
 import login_logo from "./../assets/images/login_logo.png";
 
-function SignInScreen({ navigation }) {
-  const [show, setShow] = useState(false);
-  const [error, setError] = useState("");
-  const [signInWith, setSignInWith] = useState({
-    email: "",
-    password: "",
-  });
+export default class SignInScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+      setShow: false,
+      Error: "",
+      setError: "",
+      Email: "",
+      Password: "",
+      check_textInputChange: false,
+      secureTextEntry: true,
+      confirmSecureTextEntry: true,
+    };
+  }
 
-  const signInAction = () => {
-    if (signInWith.email === "" || signInWith.password === "") {
-      setError("error,fill all inputs please");
-    } else if (
-      signInWith.password === "1" &&
-      signInWith.email === "1"
-    ) {
-      console.log(signInWith);
-      navigation.navigate("Home");
-    }
-    else{
-      setError("Wrong Password or Email");
+  InsertRecord = () => {
+    var Email = this.state.Email;
+    var Password = this.state.Password;
+    var checkEmail = RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+
+    if (Email.length == 0 || Password.length == 0) {
+      this.setState({ Error: "error,fill all inputs please" });
+    } else if (!checkEmail.test(Email)) {
+      this.setState({ Error: "Enter a valid email address" });
+    } else {
+      var APIURL = "http://10.0.2.2:80/backend/signin.php";
+
+      var headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+
+      var Data = {
+        Email: Email,
+        Password: Password,
+      };
+
+      fetch(APIURL, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(Data),
+      })
+        .then((Response) => Response.json())
+        .then((Response) => {
+          this.setState({ Error: Response[0].Message });
+
+          if (Response[0].Message == "Success") {
+            console.log("true");
+            this.props.route.params.loggedInFun(true)
+            this.props.navigation.navigate("Home");
+          }
+          console.log(Data);
+        })
+        .catch((error) => {
+          console.error("ERROR FOUND" + error);
+        });
     }
   };
 
-  return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <View style={styles.container1}>
-          <View style={styles.container1_1}>
-            <Image source={login_logo} style={styles.logo} />
+  updateSecureTextEntry() {
+    this.setState({
+      ...this.state,
+      secureTextEntry: !this.state.secureTextEntry,
+    });
+  }
+
+  render() {
+    return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View style={styles.container1}>
+            <View style={styles.container1_1}>
+              <Image source={login_logo} style={styles.logo} />
+            </View>
+            <View style={styles.container1_2}>
+              <Text style={styles.logintext}>Sign In</Text>
+              <Text style={styles.logindiscreption}>
+                Please enter your credentials
+              </Text>
+            </View>
           </View>
-          <View style={styles.container1_2}>
-            <Text style={styles.logintext}>Sign In</Text>
-            <Text style={styles.logindiscreption}>
-              Please enter your credentials
-            </Text>
+          <View style={styles.container2}>
+            <View style={styles.container2_1}>
+              <Text style={styles.credentials}>Email</Text>
+            </View>
+            <View style={styles.container2_2}>
+              <TextInput
+                placeholder={"Email"}
+                style={styles.input}
+                onChangeText={(Email) => this.setState({ Email })}
+              />
+            </View>
+            <View style={styles.container2_1}>
+              <Text style={styles.credentials}>Password</Text>
+            </View>
+            <View style={styles.container2_2}>
+              <TextInput
+                placeholder={"Password"}
+                secureTextEntry={true}
+                style={styles.input}
+                onChangeText={(Password) => this.setState({ Password })}
+              />
+            </View>
           </View>
-        </View>
-        <View style={styles.container2}>
-          <View style={styles.container2_1}>
-            <Text style={styles.credentials}>Email</Text>
+          <View View style={styles.container2_2}>
+            {<Text style={styles.error}>{this.state.Error}</Text>}
           </View>
-          <View style={styles.container2_2}>
-            <TextInput
-              placeholder={"Email"}
-              style={styles.input}
-              value={signInWith.email}
-              onChangeText={(text) => {
-                setSignInWith({ ...signInWith, email: text });
+          <View style={styles.container3}>
+            <TouchableOpacity
+              style={styles.signInBtn}
+              onPress={() => {
+                this.InsertRecord();
               }}
-            />
-          </View>
-          <View style={styles.container2_1}>
-            <Text style={styles.credentials}>Password</Text>
-          </View>
-          <View style={styles.container2_2}>
-            <TextInput
-              placeholder={"Password"}
-              secureTextEntry={true}
-              style={styles.input}
-              value={signInWith.password}
-              onChangeText={(text) => {
-                setSignInWith({ ...signInWith, password: text });
-              }}
-            />
-          </View>
-        </View>
-        <View View style={styles.container2_2}>
-          <Text style={styles.error}>{error}</Text>
-        </View>
-        <View style={styles.container3}>
-          <TouchableOpacity
-            style={styles.signInBtn}
-            onPress={() => signInAction()}
-          >
-            <Text style={styles.signIn}>Sign In</Text>
-          </TouchableOpacity>
-          <View style={styles.row}>
-            <Text>Don’t have an account? </Text>
-            <TouchableOpacity onPress={() => setShow(true)}>
-              <Text style={styles.link}>Sign up</Text>
+            >
+              <Text style={styles.signIn}>Sign In</Text>
             </TouchableOpacity>
-          </View>
-        </View>
-        <View style={[styles.popUp, { display: show ? "flex" : "none" }]}>
-          <View style={styles.popUpCont}>
-            <TouchableOpacity onPress={() => setShow(false)}>
-              <View style={styles.cancel}></View>
-            </TouchableOpacity>
-            <View style={styles.btnCont}>
-              <Text style={styles.popUpTitle}>how would you sign up?</Text>
-              <TouchableOpacity style={styles.popUpBtn}>
-                <View style={styles.btnContainer}>
-                  <FontAwesome5Icon name="user-md" style={styles.popUpIcon} />
-                  <View>
-                    <Text style={styles.iconTitle}>doctor</Text>
-                    <Text style={styles.iconDesc}>
-                      Connect with your patients immediately.
-                    </Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+            <View style={styles.row}>
+              <Text>Don’t have an account? </Text>
               <TouchableOpacity
-                style={styles.popUpBtn}
-                onPress={() => navigation.navigate("SignUpPatientScreen")}
+                onPress={() => {
+                  this.setState({ show: true });
+                }}
               >
-                <View style={styles.btnContainer}>
-                  <FontAwesome5Icon name="user" style={styles.popUpIcon} />
-                  <View>
-                    <Text style={styles.iconTitle}>patient</Text>
-                    <Text style={styles.iconDesc}>
-                      Easiest way to book appointment with favorite doctor.
-                    </Text>
-                  </View>
-                </View>
+                <Text style={styles.link}>Sign up</Text>
               </TouchableOpacity>
             </View>
           </View>
+          <View
+            style={[
+              styles.popUp,
+              { display: this.state.show ? "flex" : "none" },
+            ]}
+          >
+            <View style={styles.popUpCont}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState({ show: false });
+                }}
+              >
+                <View style={styles.cancel}></View>
+              </TouchableOpacity>
+              <View style={styles.btnCont}>
+                <Text style={styles.popUpTitle}>how would you sign up?</Text>
+                <TouchableOpacity style={styles.popUpBtn}>
+                  <View style={styles.btnContainer}>
+                    <FontAwesome5Icon name="user-md" style={styles.popUpIcon} />
+                    <View>
+                      <Text style={styles.iconTitle}>doctor</Text>
+                      <Text style={styles.iconDesc}>
+                        Connect with your patients immediately.
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.popUpBtn}
+                  onPress={() =>
+                    this.props.navigation.navigate("SignUpPatientScreen")
+                  }
+                >
+                  <View style={styles.btnContainer}>
+                    <FontAwesome5Icon name="user" style={styles.popUpIcon} />
+                    <View>
+                      <Text style={styles.iconTitle}>patient</Text>
+                      <Text style={styles.iconDesc}>
+                        Easiest way to book appointment with favorite doctor.
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
         </View>
-      </View>
-    </TouchableWithoutFeedback>
-  );
+      </TouchableWithoutFeedback>
+    );
+  }
 }
 const styles = StyleSheet.create({
   container: {
@@ -161,7 +218,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   container2: {
-    flex: 0.7,
+    flex: 0.8,
     width: "100%",
     backgroundColor: COLORS.Background,
   },
@@ -179,7 +236,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.Background,
   },
   container3: {
-    flex: 1.1,
+    flex: 1,
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-start",
@@ -305,5 +362,3 @@ const styles = StyleSheet.create({
     color: "red",
   },
 });
-
-export default SignInScreen;

@@ -16,14 +16,14 @@ import { useLayoutEffect } from "react";
 
 export default OnBoarding = ({ navigation }) => {
 
-  useLayoutEffect(() => {
-    const hideUnsubscribe = navigation.addListener('focus', e => {
-      let parentNav = navigation.getParent();
-      parentNav.setOptions({
-        tabBarStyle: {display: 'none'},
-      });
-    });
-  }, []);
+  // useLayoutEffect(() => {
+  //   const hideUnsubscribe = navigation.addListener('focus', e => {
+  //     let parentNav = navigation.getParent();
+  //     parentNav.setOptions({
+  //       tabBarStyle: {display: 'none'},
+  //     });
+  //   });
+  // }, []);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;

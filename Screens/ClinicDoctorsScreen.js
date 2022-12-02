@@ -9,10 +9,12 @@ import React, { useState } from "react";
 import Clinic_data from "../assets/data/Clinic_data";
 import { ClinicList, ClinicSearchBar } from "../Components";
 import { COLORS } from "../assets/constants";
+import { useLayoutEffect } from "react";
 
-function ClinicDoctorsScreen(props) {
+function ClinicDoctorsScreen({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -28,13 +30,12 @@ function ClinicDoctorsScreen(props) {
           </View>
         </View>
         <View style={styles.container1}>
-          {
-            <ClinicList
-              searchPhrase={searchPhrase}
-              data={Clinic_data}
-              setClicked={setClicked}
-            />
-          }
+          <ClinicList
+            searchPhrase={searchPhrase}
+            data={Clinic_data}
+            setClicked={setClicked}
+            navigation={navigation}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
