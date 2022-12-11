@@ -19,6 +19,7 @@ import LogoutAlert from "./Components/LogoutAlert";
 import { SignUpAlert } from "./Components";
 import SuccessAlert from "./Components/SuccessAlert";
 import BookAppointment from "./Components/Pages/BookAppointment";
+import BookAppointmentScreen from "./Screens/BookAppointmentScreen";
 
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -33,7 +34,8 @@ const App = () => {
   return (
     <View style={styles.mainContainer}>
       <StatusBar />
-      {changeScreen ? <MainScreen /> : <SplashScreen />}
+      {/* {changeScreen ? <MainScreen /> : <SplashScreen />} */}
+      <BookAppointmentScreen />
     </View>
   );
 };

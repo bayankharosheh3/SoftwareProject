@@ -9,6 +9,7 @@ import { COLORS } from "../assets/constants";
 import HomeStack from "./HomeStack";
 import MessagesScreen from "../Screens/MessagesScreen";
 import MessageStack from "./MessageStack";
+import AppointmentsScreen from "../Screens/BookAppointmentScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -77,8 +78,8 @@ const TabNav = () => {
       />
       <Tab.Screen
         name="AppointmentsPage"
-        component={AppointmentsPage}
-        options={{ headerShown: false }}
+        component={AppointmentsScreen}
+        // options={{ headerShown: false }}
       />
       <Tab.Screen
         name="ProfilePage"
