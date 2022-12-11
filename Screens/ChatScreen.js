@@ -1,12 +1,10 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import React, { useState, useCallback, useEffect } from "react";
-import PageHeader from "../ScreenHeader";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
-import { COLORS } from "../../assets/constants";
+import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
-const ChatPage = ({ route, navigation }) => {
+const ChatScreen = ({ route, navigation }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -95,6 +93,6 @@ const ChatPage = ({ route, navigation }) => {
   );
 };
 
-export default ChatPage;
+export default ChatScreen;
 
 const styles = StyleSheet.create({});

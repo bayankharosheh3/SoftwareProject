@@ -5,9 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AppointmentsPage, ProfilePage } from "../Components/Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "../assets/constants";
-import MessagesPage from "../Components/Pages/MessagesPage";
 
 import HomeStack from "./HomeStack";
+import MessagesScreen from "../Screens/MessagesScreen";
+import MessageStack from "./MessageStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -69,8 +70,8 @@ const TabNav = () => {
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="MessagesPage" 
-        component={MessagesPage}
+        name="MessagesPage"
+        component={MessageStack}
         options={{ headerShown: false }}
         // options={({ route }) => console.log(route)}
       />

@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ChatPage, AppointmentsPage, ProfilePage } from "./Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "../assets/constants";
-import MessagesPage from "./Pages/MessagesPage";
+import MessagesPage from "../Screens/MessagesScreen";
 import NotificationsPage from "./Pages/NotificationsPage";
 import EditAccountPage from "./Pages/EditAccountPage";
 import SupportingPage from "./Pages/SupportingPage";

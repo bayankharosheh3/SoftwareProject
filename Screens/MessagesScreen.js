@@ -8,14 +8,15 @@ import {
   FlatList,
 } from "react-native";
 import React from "react";
-import PageHeader from "../ScreenHeader";
+import messages from "../assets/data/messages";
+import { ScreenHeader } from "../Components";
 // import { FlatList } from "react-native-gesture-handler";
-import messages from "../../assets/data/messages";
+// import messages from "../assets/data/messages";
 
-const MessagesPage = ({ navigation }) => {
+const MessagesScreen = ({ navigation }) => {
   return (
     <View style={styles.mainContainer}>
-      <PageHeader title={"Chat"} />
+      <ScreenHeader title={"Chat"} />
 
       <View style={styles.container}>
         {/* <Button
@@ -36,7 +37,7 @@ const MessagesPage = ({ navigation }) => {
                 <View style={styles.userImgWrapper}>
                   <Image
                     style={styles.userImg}
-                    source={require("../../assets/images/1.png")}
+                    source={require("../assets/images/1.png")}
                   />
                 </View>
                 <View style={styles.textSection}>
@@ -58,7 +59,7 @@ const MessagesPage = ({ navigation }) => {
   );
 };
 
-export default MessagesPage;
+export default MessagesScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {
