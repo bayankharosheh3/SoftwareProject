@@ -5,21 +5,8 @@ import { useState, useEffect } from "react";
 
 // screens
 import { HomeScreen, MainScreen, SplashScreen } from "./Screens";
-import {
-  BookingSuccessPage,
-  ChatPage,
-  DoctorProfilePage,
-  MedicalFilesPage,
-  NotificationsPage,
-  SupportingPage,
-} from "./Components/Pages";
-import ChangePassword from "./Components/ChangePassword";
-import EditAccountConfirm from "./Components/EditAccountConfirm";
-import LogoutAlert from "./Components/LogoutAlert";
-import { SignUpAlert } from "./Components";
-import SuccessAlert from "./Components/SuccessAlert";
-import BookAppointment from "./Components/Pages/BookAppointment";
-import BookAppointmentScreen from "./Screens/BookAppointmentScreen";
+import ReviewsScreen from "./Screens/ReviewsScreen";
+import RoutingDataProvider from "./Components/Context/RoutingDataProvider";
 
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -32,11 +19,13 @@ const App = () => {
   }, []);
 
   return (
-    <View style={styles.mainContainer}>
-      <StatusBar />
-      {/* {changeScreen ? <MainScreen /> : <SplashScreen />} */}
-      <BookAppointmentScreen />
-    </View>
+    <RoutingDataProvider>
+      <View style={styles.mainContainer}>
+        <StatusBar />
+        {changeScreen ? <MainScreen /> : <SplashScreen />}
+        {/* <ReviewsScreen/> */}
+      </View>
+    </RoutingDataProvider>
   );
 };
 

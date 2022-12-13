@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { COLORS } from "../../assets/constants";
+import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
-import messages from "../../assets/data/messages";
+import messages from "../assets/data/messages";
 
-const DoctorProfilePage = () => {
+const DoctorProfileScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.column}>
@@ -19,7 +19,7 @@ const DoctorProfilePage = () => {
           <View style={styles.infoContainer}>
             <View style={styles.imgView}>
               <Image
-                source={require("./../../assets/images/1.jpg")}
+                source={require("./../assets/images/1.jpg")}
                 style={styles.imgProfile}
               ></Image>
             </View>
@@ -29,7 +29,7 @@ const DoctorProfilePage = () => {
             </View>
             <View style={styles.rateView}>
               <Image
-                source={require("./../../assets/images/star.png")}
+                source={require("./../assets/images/star.png")}
                 style={styles.starIcon}
               />
               <Text style={styles.rateValue}>4.7</Text>
@@ -88,7 +88,7 @@ const DoctorProfilePage = () => {
   );
 };
 
-export default DoctorProfilePage;
+export default DoctorProfileScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {

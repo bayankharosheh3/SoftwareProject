@@ -66,7 +66,7 @@ export default class SignInScreen extends Component {
           if (Response[0].Message == "Success") {
             console.log("true");
             this.props.route.params.loggedInFun(true)
-            this.props.navigation.navigate("Home");
+            this.props.navigation.navigate("HomeScreen");
           }
           console.log(Data);
         })
