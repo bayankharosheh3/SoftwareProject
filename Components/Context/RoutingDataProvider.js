@@ -1,20 +1,15 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { createContext } from "react";
+import React, { useState, createContext } from "react";
 
 export const RoutingData = createContext();
 
 const RoutingDataProvider = ({ children }) => {
-  const [clickCards, setClickCards] = useState(true);
-  const [data, setData] = useState("nnnn");
-
-  useEffect(() => {
-    setClickCards(true);
-  }, []);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedInAs, setLoggedInAs] = useState("doctor");
 
   return (
-    <RoutingData.Provider value={{ clickCards, setClickCards, data }}>
+    <RoutingData.Provider
+      value={{ loggedIn, setLoggedIn, loggedInAs, setLoggedInAs }}
+    >
       {children}
     </RoutingData.Provider>
   );

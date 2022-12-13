@@ -1,10 +1,15 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { HomeScreen, OnBoardingScreen, SignInScreen, SignUpPatientScreen } from "../Screens";
+import {
+  DoctorSignUp,
+  OnBoardingScreen,
+  SignInScreen,
+  SignUpPatientScreen,
+} from "../Screens";
 
 const Stack = createStackNavigator();
 
-const AuthStack = ({setLoggedIn}) => {
+const AuthStack = ({ setLoggedIn, setLoggedInAs }) => {
   return (
     <Stack.Navigator initialRouteName="OnBoarding">
       <Stack.Screen
@@ -16,16 +21,19 @@ const AuthStack = ({setLoggedIn}) => {
         name="SignInScreen"
         component={SignInScreen}
         options={{ headerShown: false }}
-        initialParams={{ loggedInFun: setLoggedIn }}
+        initialParams={{
+          loggedInFun: setLoggedIn,
+          setLoggedInAs: setLoggedInAs,
+        }}
       />
       <Stack.Screen
         name="SignUpPatientScreen"
         component={SignUpPatientScreen}
         options={{ headerShown: false }}
       />
-        <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+      <Stack.Screen
+        name="DoctorSignUp"
+        component={DoctorSignUp}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

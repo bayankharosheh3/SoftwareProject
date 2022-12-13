@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -7,14 +7,30 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useState } from "react";
 import AuthStack from "../navigation/AuthStack";
 import TabNav from "../navigation/TabNav";
+import { RoutingData } from "../Components/Context/RoutingDataProvider";
+import HomeStack from "../navigation/HomeStack";
+import DoctorRoute from "../navigation/DoctorRoute";
 
 const MainScreen = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const loggedInData = useContext(RoutingData);
+
+  console.log(loggedInData.loggedInAs);
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        {/* <BottomTabNavigator /> */}
-        {loggedIn ? <TabNav /> : <AuthStack setLoggedIn={setLoggedIn} />}
+        {loggedInData.loggedIn ? (
+          loggedInData.loggedInAs == "patient" ? (
+            <HomeStack />
+          ) : (
+            <DoctorRoute />
+          )
+        ) : (
+          <AuthStack
+            setLoggedIn={loggedInData.setLoggedIn}
+            setLoggedInAs={loggedInData.setLoggedInAs}
+          />
+        )}
       </NavigationContainer>
     </View>
   );

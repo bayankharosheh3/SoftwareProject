@@ -66,7 +66,7 @@ export default class SignInScreen extends Component {
           if (Response[0].Message == "Success") {
             console.log("true");
             this.props.route.params.loggedInFun(true)
-            this.props.navigation.navigate("HomeScreen");
+            this.props.route.params.setLoggedInAs('doctor')
           }
           console.log(Data);
         })
@@ -160,7 +160,9 @@ export default class SignInScreen extends Component {
               </TouchableOpacity>
               <View style={styles.btnCont}>
                 <Text style={styles.popUpTitle}>how would you sign up?</Text>
-                <TouchableOpacity style={styles.popUpBtn}>
+                <TouchableOpacity style={styles.popUpBtn}  onPress={() =>
+                    this.props.navigation.navigate("DoctorSignUp")
+                  }>
                   <View style={styles.btnContainer}>
                     <FontAwesome5Icon name="user-md" style={styles.popUpIcon} />
                     <View>

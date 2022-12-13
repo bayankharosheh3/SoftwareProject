@@ -1,31 +1,23 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { ClinicsScreen, DoctorProfileScreen, HomeScreen } from "../Screens";
+import DoctorHome from "../Screens/DoctorsScreens/DoctorHome";
 import ClinicsStack from "./ClinicsStack";
 import DoctorsStack from "./DoctorsStack";
 import TabNav from "./TabNav";
 
 const Stack = createStackNavigator();
-const HomeStack = () => {
+const DoctorRoute = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="home"
-        component={TabNav}
+        name="DoctorHome"
+        component={DoctorHome}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="ClinicStack"
-        component={ClinicsStack}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="DoctorStack"
-        component={DoctorsStack}
-        options={{ headerShown: false }}
-      />
+     
     </Stack.Navigator>
   );
 };
 
-export default HomeStack;
+export default DoctorRoute;

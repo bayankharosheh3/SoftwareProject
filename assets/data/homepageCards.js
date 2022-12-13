@@ -4,7 +4,7 @@ export default [
     cardTitle: "Doctors",
     cardSubTitle: "Choose your doctors",
     cardIcon: require("./../images/allDoctors.png"),
-    cardScreen: "Clinics",
+    cardScreen: "DoctorStack",
   },
   {
     id: "2",
@@ -24,13 +24,6 @@ export default [
     id: "4",
     cardTitle: "Prescription",
     cardSubTitle: "Get doctor's prescription",
-    cardIcon: require("./../images/prescriptions.png"),
-    cardScreen: "Clinics",
-  },
-  {
-    id: "5",
-    cardTitle: "Appointments",
-    cardSubTitle: "New and past appointments",
     cardIcon: require("./../images/prescriptions.png"),
     cardScreen: "Clinics",
   },

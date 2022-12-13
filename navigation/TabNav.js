@@ -10,6 +10,7 @@ import HomeStack from "./HomeStack";
 import MessagesScreen from "../Screens/MessagesScreen";
 import MessageStack from "./MessageStack";
 import AppointmentsScreen from "../Screens/BookAppointmentScreen";
+import { HomeScreen } from "../Screens";
 
 const Tab = createBottomTabNavigator();
 
@@ -67,7 +68,7 @@ const TabNav = () => {
     >
       <Tab.Screen
         name="HomeScreen"
-        component={HomeStack}
+        component={HomeScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen
