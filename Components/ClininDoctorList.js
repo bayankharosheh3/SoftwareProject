@@ -26,7 +26,7 @@ const Item = ({ name, details, navigation }) => (
 );
 
 // the filter
-const ClinicList = ({ searchPhrase, setCLicked, data, navigation }) => {
+const ClinicDoctorList = ({ searchPhrase, setCLicked, data, navigation }) => {
   const renderItem = ({ item }) => {
     // when no input, show all
     if (searchPhrase === "") {
@@ -34,7 +34,7 @@ const ClinicList = ({ searchPhrase, setCLicked, data, navigation }) => {
         <View style={styles.container0}>
           <TouchableOpacity
             style={styles.card}
-            onPress={() => navigation.navigate("ClinicDoctors",{id:"bayan"})}
+            onPress={() => navigation.navigate("DoctorProfile",{DoctorId:"doctor1"})}
           >
             <View style={styles.userInfo}>
               <View style={styles.userImgWrapper}>
@@ -42,7 +42,7 @@ const ClinicList = ({ searchPhrase, setCLicked, data, navigation }) => {
               </View>
               <View style={styles.textSection}>
                 <View style={styles.userInfoText}>
-                  <Text style={styles.userName}>{item.clinic_name}</Text>
+                  <Text style={styles.userName}>{item.doctor_name}</Text>
                   <View>
                     <View style={styles.rateinfo}>
                       <Text style={styles.rate}>{item.rate}</Text>
@@ -116,7 +116,7 @@ const ClinicList = ({ searchPhrase, setCLicked, data, navigation }) => {
   );
 };
 
-export default ClinicList;
+export default ClinicDoctorList;
 
 const styles = StyleSheet.create({
   list__container: {

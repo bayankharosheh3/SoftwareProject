@@ -6,22 +6,25 @@ import {
   Dimensions,
 } from "react-native";
 import React, { useState } from "react";
-import Clinic_data from "../assets/data/Clinic_data";
+import doctors_data from "../assets/data/clinicDoctor";
 import { ClinicList, ClinicSearchBar } from "../Components";
 import { COLORS } from "../assets/constants";
 import { useLayoutEffect } from "react";
+import ClinicDoctorSearch from "../Components/ClinicDoctorSearch";
+import ClinicDoctorList from "../Components/ClininDoctorList";
 
-function ClinicDoctorsScreen({ navigation }) {
+function ClinicDoctorsScreen({ navigation,route }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
 
+  console.log(route.params.id +'20')
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.search}>
             {!clicked}
-            <ClinicSearchBar
+            <ClinicDoctorSearch
               searchPhrase={searchPhrase}
               setSearchPhrase={setSearchPhrase}
               clicked={clicked}
@@ -30,9 +33,9 @@ function ClinicDoctorsScreen({ navigation }) {
           </View>
         </View>
         <View style={styles.container1}>
-          <ClinicList
+          <ClinicDoctorList
             searchPhrase={searchPhrase}
-            data={Clinic_data}
+            data={doctors_data}
             setClicked={setClicked}
             navigation={navigation}
           />

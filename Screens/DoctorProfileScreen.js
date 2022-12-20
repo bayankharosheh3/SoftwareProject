@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
-import messages from "../assets/data/messages";
+import tabs from "../assets/data/doctorProfileTabs";
 
-const DoctorProfileScreen = () => {
+const DoctorProfileScreen = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.column}>
@@ -59,21 +59,21 @@ const DoctorProfileScreen = () => {
       </View>
       <View style={styles.list}>
         <FlatList
-          data={messages.slice(1, 4)}
+          data={tabs}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <TouchableOpacity
               // onPress={() => {
               //   setShow("flex");
               // }}
-              onPress={() => navigation.navigate("MedicalFilesPage")}
+              onPress={() => navigation.navigate(item.navigateTo)}
             >
               <View style={styles.listItem}>
                 <View style={styles.containerItem}>
                   <View style={styles.itemIconView}>
                     <FontAwesome5Icons name="file" style={styles.itemIcon} />
                   </View>
-                  <Text style={styles.itemTitle}>Appointments</Text>
+                  <Text style={styles.itemTitle}>{item.tabName}</Text>
                   <FontAwesome5Icons
                     name="chevron-right"
                     style={styles.itemArrow}

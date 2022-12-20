@@ -1,6 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { ClinicDoctorsScreen, ClinicsScreen } from "../Screens";
+import BookAppointmentScreen from "../Screens/BookAppointmentScreen";
+import DoctorProfileScreen from "../Screens/DoctorProfileScreen";
+import ReviewsScreen from "../Screens/ReviewsScreen";
 
 const Stack = createStackNavigator();
 
@@ -43,6 +46,27 @@ const ClinicsStack = () => {
         //     };
         //   }
         // }
+      />
+      <Stack.Screen
+        name="DoctorProfile"
+        component={DoctorProfileScreen}
+        options={{
+          headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="BookAppointment"
+        component={BookAppointmentScreen}
+        options={{
+          headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="Reviews"
+        component={ReviewsScreen}
+        options={{
+          headerBackTitleVisible: false,
+        }}
       />
     </Stack.Navigator>
   );
