@@ -12,15 +12,13 @@ import star from "../assets/images/star.png";
 import chat from "../assets/images/chat.png";
 
 // definition of the Item, which will be rendered in the FlatList
-const Item = ({ name, details }) => (
+const Item = ({ name, details, navigation }) => (
   <View style={styles.item}>
     <View style={styles.container0}>
       <TouchableOpacity
         style={styles.card}
         onPress={() =>
-          navigation.navigate("doctor_appointments", {
-            userName: item.doctor_name,
-          })
+          navigation.navigate("DoctorProfile", { doctorId: "doctor1" })
         }
       >
         <View style={styles.userInfo}>
@@ -67,9 +65,7 @@ const List = ({ searchPhrase, setCLicked, data }) => {
           <TouchableOpacity
             style={styles.card}
             onPress={() =>
-              navigation.navigate("doctor_appointments", {
-                userName: item.doctor_name,
-              })
+              navigation.navigate("DoctorProfile", { doctorId: "doctor1" })
             }
           >
             <View style={styles.userInfo}>
@@ -116,9 +112,7 @@ const List = ({ searchPhrase, setCLicked, data }) => {
           <TouchableOpacity
             style={styles.card}
             onPress={() =>
-              navigation.navigate("doctor_appointments", {
-                userName: item.doctor_name,
-              })
+              navigation.navigate("DoctorProfile", { doctorId: "doctor1" })
             }
           >
             <View style={styles.userInfo}>

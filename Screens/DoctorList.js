@@ -20,68 +20,10 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import DATA from "../assets/data/doctorsData";
 import SearchBar from "../Components/SearchBar";
 import List from "../Components/List";
-function DoctorList(props) {
+import MyTabs from "../navigation/AllDoctorsTabs";
+function DoctorList({props,navigation}) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [fakeData, setFakeData] = useState();
-
-  function AllDoctors() {
-    return (
-      <SafeAreaView style={styles.root}>
-        {!clicked}
-
-        {
-          <List
-            searchPhrase={searchPhrase}
-            data={DATA}
-            setClicked={setClicked}
-          />
-        }
-      </SafeAreaView>
-    );
-  }
-  function MyDoctors() {
-    return (
-      <SafeAreaView style={styles.root}>
-        {!clicked}
-
-        {
-          <List
-            searchPhrase={searchPhrase}
-            data={DATA}
-            setClicked={setClicked}
-          />
-        }
-      </SafeAreaView>
-    );
-  }
-
-  const Tab = createMaterialTopTabNavigator();
-
-  function MyTabs() {
-    return (
-      <Tab.Navigator
-        initialRouteName="alldoctors"
-        screenOptions={{
-          tabBarActiveTintColor: "#000",
-          tabBarLabelStyle: { fontSize: 15 },
-          tabBarStyle: { backgroundColor: "#fff" },
-        }}
-      >
-        <Tab.Screen
-          name="alldoctors"
-          component={AllDoctors}
-          options={{ tabBarLabel: "All Doctors" }}
-        />
-
-        <Tab.Screen
-          name="mydoctors"
-          component={MyDoctors}
-          options={{ tabBarLabel: "My doctors" }}
-        />
-      </Tab.Navigator>
-    );
-  }
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -89,7 +31,6 @@ function DoctorList(props) {
           <View style={styles.top}></View>
           <View style={styles.title}>
             <Text style={styles.titleText}>All Doctors</Text>
-
             <SafeAreaView style={styles.root}>
               {!clicked}
               <SearchBar
@@ -103,7 +44,13 @@ function DoctorList(props) {
           <View style={styles.tab}></View>
         </View>
         <View style={styles.container1}>
-          <MyTabs />
+          <MyTabs
+            searchPhrase={searchPhrase}
+            setSearchPhrase={setSearchPhrase}
+            clicked={clicked}
+            setClicked={setClicked}
+            navigation={navigation}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
