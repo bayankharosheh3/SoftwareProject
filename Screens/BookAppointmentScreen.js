@@ -1,45 +1,66 @@
 import { Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { Calendar } from "react-native-calendars";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { COLORS } from "../assets/constants";
+import { AntDesign } from "@expo/vector-icons";
+import axios from "axios";
+const BookAppointmentScreen = ({ navigation,route }) => {
+  console.log(route.params.doctorId)
 
-const BookAppointmentScreen = () => {
   const [selectedDate, setSelectedDate] = useState();
   const [selectedAppointment, setSelectedAppointment] = useState({
     day: "",
     hour: "",
+    id: "",
   });
 
-  const availableDates = [
-    {
-      date: "2022-12-13",
-      hours: ["11:00", "11:30", "15:00", "12:30", "13:00", "14:30"],
-    },
-    {
-      date: "2022-12-14",
-      hours: ["11:00", "11:30", "1r:00", "12:30", "13:00", "14:30"],
-    },
-    {
-      date: "2022-12-15",
-      hours: ["11:00", "11:30", "12:30", "12:30", "13:00", "14:30"],
-    },
-    {
-      date: "2022-12-25",
-      hours: ["11:00", "11:30", "12:00", "12:30", "13:00", "14:30"],
-    },
-    {
-      date: "2022-12-27",
-      hours: ["11:00", "11:30", "12:00", "12:30", "13:00", "14:30"],
-    },
-  ];
+  const [chosen, setChosen] = useState({ day: "", time: "" });
 
-  const selectedDay = availableDates.find((date) => date.date === selectedDate);
+  const [isLoading, setLoading] = useState(false);
+  const [users, setUsers] = useState([]);
+  var Data = {
+    id: 1,
+  };
 
-  const booking = (day, hour) => {
+  var headers = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+
+  const getUsers = () => {
+    axios
+      .post("http://10.0.2.2:80/backend/appointments.php", Data)
+      .then((response) => response.data)
+      .then((json) => setUsers(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+    //console.log(response.data);
+    // fetch("http://10.0.2.2:80/backend/appointments.php", {
+    //   method: "POST",
+    //   headers: headers,
+    //   body: JSON.stringify({
+    //     id: 1,
+    //   }), //convert data to JSON
+    // })
+    //   .then((response) => response.json())
+    //   .then((json) => setUsers(json))
+    //   .catch((error) => console.error(error))
+    //   .finally(() => setLoading(false));
+  };
+  useEffect(() => {
+    setLoading(true);
+    getUsers();
+  }, []);
+
+  const selectedDay = users.find((date) => date.date === selectedDate);
+
+  console.log(selectedDay);
+  const booking = (day, hour, id) => {
     setSelectedAppointment({
       day: day,
       hour: hour,
+      id: id,
     });
   };
   console.log(selectedAppointment);
@@ -47,7 +68,7 @@ const BookAppointmentScreen = () => {
   //custom
   var customMarkedDate = {};
 
-  availableDates.map((day) => {
+  users.map((day) => {
     customMarkedDate[day.date] = {
       selected: true,
       selectedColor: COLORS.Main,
@@ -86,15 +107,42 @@ const BookAppointmentScreen = () => {
       </View>
       <View style={styles.btnCont}>
         {selectedDay &&
-          selectedDay.hours.map((hour) => (
+          selectedDay.hour_ids.map((hour_id) => (
             <TouchableOpacity
-              onPress={() => booking(selectedDay.date, hour)}
+              onPress={() => {
+                booking(selectedDay.date, hour_id.hours, hour_id.id);
+                setChosen({
+                  ...chosen,
+                  day: selectedDay.date,
+                  time: hour_id.hours,
+                });
+              }}
               style={styles.btn}
               activeOpacity={0.6}
             >
-              <Text style={styles.txt}>{hour}</Text>
+              <Text style={styles.txt}>{hour_id.hours}</Text>
             </TouchableOpacity>
           ))}
+      </View>
+      <View style={styles.nextCont}>
+        <View style={styles.chosen}>
+          <Text style={styles.txtchosen}>Selected Day: {chosen.day}</Text>
+          <Text style={styles.txtchosen}>Selected Time: {chosen.time}</Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Payment", { appId: "appid",doctorId:route.params.doctorId });
+          }}
+          style={styles.nextbtn}
+          activeOpacity={0.6}
+        >
+          <View style={styles.nextcontainer}>
+            <Text style={styles.nexttxt}>next</Text>
+            <View style={styles.arrow}>
+              <AntDesign name="arrowright" size={12} color={COLORS.Main} />
+            </View>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -115,7 +163,7 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   btnCont: {
-    // flex:1,
+    flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
@@ -135,4 +183,45 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     textAlign: "center",
   },
+  nextbtn: {
+    backgroundColor: COLORS.white,
+    borderRadius: 7,
+    padding: 20,
+    paddingVertical: 14,
+    borderColor: COLORS.Main,
+    borderWidth: 1,
+    width: "35%",
+  },
+  nextcontainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  nexttxt: {
+    color: COLORS.Main,
+    fontSize: 16,
+    textTransform: "uppercase",
+    paddingRight: 13,
+  },
+  arrow: {
+    borderColor: COLORS.Main,
+    borderWidth: 2,
+    borderRadius: 100,
+    padding: 2,
+  },
+  nextCont: {
+    flexDirection:'row',
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+  },
+  chosen:{
+    justifyContent: "space-between",
+  },
+  txtchosen:{
+    // textAlign:'left',
+    color: COLORS.Main,
+    fontSize: 16,
+    fontWeight: "600",
+  }
 });

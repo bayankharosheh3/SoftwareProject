@@ -67,6 +67,7 @@ export default class SignInScreen extends Component {
             console.log("true");
             this.props.route.params.loggedInFun(true);
             this.props.route.params.setLoggedInAs("patient");
+            this.props.route.params.setUserId(777);
           }
           console.log(Data);
         })

@@ -34,7 +34,7 @@ const ClinicList = ({ searchPhrase, setCLicked, data, navigation }) => {
         <View style={styles.container0}>
           <TouchableOpacity
             style={styles.card}
-            onPress={() => navigation.navigate("ClinicDoctors",{id:"bayan"})}
+            onPress={() => navigation.navigate("ClinicDoctors",{clinicId:item.clinic_id})}
           >
             <View style={styles.userInfo}>
               <View style={styles.userImgWrapper}>

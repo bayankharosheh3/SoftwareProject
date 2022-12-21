@@ -9,7 +9,7 @@ import {
 
 const Stack = createStackNavigator();
 
-const AuthStack = ({ setLoggedIn, setLoggedInAs }) => {
+const AuthStack = ({ setLoggedIn, setLoggedInAs, setUserId }) => {
   return (
     <Stack.Navigator initialRouteName="OnBoarding">
       <Stack.Screen
@@ -24,6 +24,7 @@ const AuthStack = ({ setLoggedIn, setLoggedInAs }) => {
         initialParams={{
           loggedInFun: setLoggedIn,
           setLoggedInAs: setLoggedInAs,
+          setUserId: setUserId,
         }}
       />
       <Stack.Screen

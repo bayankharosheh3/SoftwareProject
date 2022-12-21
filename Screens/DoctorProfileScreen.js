@@ -11,7 +11,10 @@ import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import tabs from "../assets/data/doctorProfileTabs";
 
-const DoctorProfileScreen = ({navigation}) => {
+const DoctorProfileScreen = ({navigation,route}) => {
+
+  console.log(route.params.doctorId)
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.column}>
@@ -66,7 +69,7 @@ const DoctorProfileScreen = ({navigation}) => {
               // onPress={() => {
               //   setShow("flex");
               // }}
-              onPress={() => navigation.navigate(item.navigateTo)}
+              onPress={() => navigation.navigate(item.navigateTo,{doctorId:route.params.doctorId})}
             >
               <View style={styles.listItem}>
                 <View style={styles.containerItem}>

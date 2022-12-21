@@ -12,7 +12,6 @@ import HomeStack from "../navigation/HomeStack";
 import DoctorRoute from "../navigation/DoctorRoute";
 
 const MainScreen = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
   const loggedInData = useContext(RoutingData);
 
   console.log(loggedInData.loggedInAs);
@@ -29,6 +28,7 @@ const MainScreen = () => {
           <AuthStack
             setLoggedIn={loggedInData.setLoggedIn}
             setLoggedInAs={loggedInData.setLoggedInAs}
+            setUserId={loggedInData.setUserId}
           />
         )}
       </NavigationContainer>

@@ -17,7 +17,7 @@ function ClinicDoctorsScreen({ navigation,route }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
 
-  console.log(route.params.id +'20')
+  console.log(route.params.clinicId)
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>

@@ -1,12 +1,19 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { COLORS } from "../../assets/constants";
+import React, { useContext } from "react";
+import { COLORS } from "../assets/constants";
+import { RoutingData } from "../Components/Context/RoutingDataProvider";
 
-const BookingSuccessPage = () => {
+const BookingSuccessPage = ({route,navigation}) => {
+  const dataSignIn = useContext(RoutingData);
+  console.log(route.params.payment)
+  console.log(route.params.doctorId)
+  console.log(route.params.appId)
+  console.log(dataSignIn.userId)
+
   return (
     <View style={styles.mainContainer}>
       <Image
-        source={require("./../../assets/images/bookingsucessfuly.jpg")}
+        source={require("../assets/images/bookingsucessfuly.jpg")}
         style={styles.imgSuccess}
       />
       <Text style={styles.title}>Booking Successful</Text>
@@ -16,7 +23,9 @@ const BookingSuccessPage = () => {
       <TouchableOpacity>
         <Text style={styles.details}>View Details</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.gotBtn}>
+      <TouchableOpacity style={styles.gotBtn}  onPress={() => {
+            navigation.navigate("home");
+          }}>
         <Text style={styles.got}>GOT IT</Text>
       </TouchableOpacity>
     </View>
@@ -32,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 10,
-    position:'relative'
+    position: "relative",
   },
   imgSuccess: {
     width: 200,
@@ -52,19 +61,19 @@ const styles = StyleSheet.create({
   details: {
     color: COLORS.Main,
     marginBottom: 150,
-
   },
-  gotBtn:{
-    position:"absolute",
-    bottom:30,
-    width:'100%',
-    backgroundColor:COLORS.Main,
-    padding:15,
-    borderRadius:10,
+  gotBtn: {
+    position: "absolute",
+    bottom: 30,
+    width: "100%",
+    backgroundColor: COLORS.Main,
+    padding: 15,
+    borderRadius: 10,
   },
-  got:{
-    color:COLORS.white,
-    textAlign:"center",
-    fontSize:16,
-  }
+  got: {
+    color: COLORS.white,
+    textAlign: "center",
+    fontSize: 16,
+  },
+  
 });
