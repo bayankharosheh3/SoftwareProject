@@ -27,6 +27,7 @@ const Item = ({ name, details, navigation }) => (
 
 // the filter
 const BillsList = ({ searchPhrase, setCLicked, data, navigation }) => {
+  const paid = false;
   const renderItem = ({ item }) => {
     // when no input, show all
     if (searchPhrase === "") {
@@ -34,7 +35,9 @@ const BillsList = ({ searchPhrase, setCLicked, data, navigation }) => {
         <View style={styles.container0}>
           <TouchableOpacity
             style={styles.card}
-            onPress={() => navigation.navigate("Prescription",{clinicId:item.clinic_id})}
+            onPress={() =>
+              navigation.navigate("Prescription", { clinicId: item.clinic_id })
+            }
           >
             <View style={styles.userInfo}>
               <View style={styles.userImgWrapper}>
@@ -42,26 +45,20 @@ const BillsList = ({ searchPhrase, setCLicked, data, navigation }) => {
               </View>
               <View style={styles.textSection}>
                 <View style={styles.userInfoText}>
-                  <Text style={styles.userName}>{item.clinic_name}</Text>
+                  <Text style={styles.userName}>Doctor Name</Text>
                   <View>
                     <View style={styles.rateinfo}>
-                      <Text style={styles.rate}>{item.rate}</Text>
-                      <Image source={star} style={styles.rateimage} />
+                      <Text style={styles.rate}>200$</Text>
                     </View>
                   </View>
                 </View>
                 <View style={styles.userInfoText}>
-                  <Text style={styles.specialty}>{item.specialty}</Text>
-                  <TouchableOpacity
-                    style={styles.arrowimg}
-                    onPress={() =>
-                      navigation.navigate("clinic_doctors", {
-                        userName: item.clinic_name,
-                      })
-                    }
-                  >
-                    <Image source={greenarrow} style={styles.rateimage} />
-                  </TouchableOpacity>
+                  <Text style={styles.specialty}>22 May, 12:30 AM</Text>
+                  {!paid && (
+                    <View style={styles.notPaid}>
+                      <Text style={styles.textPaid}>Not Paid</Text>
+                    </View>
+                  )}
                 </View>
               </View>
             </View>
@@ -207,5 +204,14 @@ const styles = StyleSheet.create({
   arrowimg: {
     paddingTop: 13,
     paddingRight: 0,
+  },
+  notPaid: {
+    backgroundColor: "red",
+    borderRadius: 3,
+    padding: 2,
+    paddingHorizontal: 8,
+  },
+  textPaid: {
+    color: COLORS.FontColorWithBackground,
   },
 });

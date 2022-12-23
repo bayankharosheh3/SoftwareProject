@@ -80,7 +80,7 @@ export function Past({ navigation }) {
           <TouchableOpacity
             style={styles.card}
             onPress={() =>
-              navigation.navigate("doctor_appointments", {
+              navigation.navigate("Rating", {
                 userName: item.doctor_name,
               })
             }
@@ -119,7 +119,7 @@ export function Past({ navigation }) {
                   <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.buttonStyle}
-                    onPress={() => navigation.replace("starrating")}
+                    onPress={() => navigation.replace("Rating")}
                   >
                     <Text style={styles.buttonTextStyle}>SEND FEEDBACK</Text>
                   </TouchableOpacity>

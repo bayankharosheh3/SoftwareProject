@@ -18,7 +18,7 @@ export default [
     cardTitle: "Appointments",
     cardSubTitle: "All your Appointments",
     cardIcon: require("./../images/bills.png"),
-    cardScreen: "AppointmentStack",
+    cardScreen: "Appointment",
   },
   {
     id: "4",

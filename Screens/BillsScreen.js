@@ -10,6 +10,8 @@ import { ClinicList, ClinicSearchBar } from "../Components";
 import { COLORS } from "../assets/constants";
 import PrescriptionSearchBar from "../Components/PrescriptionSearchBar";
 import PrescriptionList from "../Components/PrescriptionList";
+import BillsSearchBar from "../Components/BillsSearchBar";
+import BillsList from "../Components/BillsList";
 
 function BillsScreen({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
@@ -36,7 +38,7 @@ function BillsScreen({ navigation }) {
         <View style={styles.header}>
           <View style={styles.search}>
             {!clicked}
-            <PrescriptionSearchBar
+            <BillsSearchBar
               searchPhrase={searchPhrase}
               setSearchPhrase={setSearchPhrase}
               clicked={clicked}
@@ -45,7 +47,7 @@ function BillsScreen({ navigation }) {
           </View>
         </View>
         <View style={styles.container1}>
-          <PrescriptionList
+          <BillsList
             searchPhrase={searchPhrase}
             data={prescription}
             setClicked={setClicked}

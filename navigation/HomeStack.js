@@ -6,6 +6,7 @@ import AppointmentsList from "../Screens/AppointmentsScreen";
 import EditAccountPage from "../Screens/EditAccountPage";
 import MedicalFilesPage from "../Screens/MedicalFilesPage";
 import NotificationsPage from "../Screens/NotificationsPage";
+import StarRating from "../Screens/RatingScreen";
 import SupportingPage from "../Screens/SupportingPage";
 import ClinicsStack from "./ClinicsStack";
 import DoctorsStack from "./DoctorsStack";
@@ -31,7 +32,9 @@ const HomeStack = () => {
         component={DoctorsStack}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="AppointmentStack" component={AppointmentsList} />
+      <Stack.Screen name="Appointment" component={AppointmentsList} />
+      <Stack.Screen name="Rating" component={StarRating} />
+
       <Stack.Screen
         name="PrescriptionsStack"
         component={PrescriptionsStack}
