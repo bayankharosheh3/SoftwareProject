@@ -1,17 +1,13 @@
 import React from "react";
-
 import { Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AppointmentsPage, ProfilePage } from "../Components/Pages";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "../assets/constants";
-
-import HomeStack from "./HomeStack";
-import MessagesScreen from "../Screens/MessagesScreen";
 import MessageStack from "./MessageStack";
 import AppointmentsScreen from "../Screens/BookAppointmentScreen";
 import { HomeScreen } from "../Screens";
-import ProfileStack from "./ProfileStack";
+import ProfilePage from "../Screens/ProfilePage";
+import BillsScreen from "../Screens/BillsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +25,7 @@ const TabNav = () => {
           const icons = {
             HomeScreen: "home",
             MessagesPage: "comment-medical",
-            AppointmentsPage: "calendar-alt",
+            Bills: "calendar-alt",
             Profile: "user-alt",
           };
           return (
@@ -48,7 +44,7 @@ const TabNav = () => {
           const labels = {
             HomeScreen: "",
             ChatPage: "",
-            AppointmentPage: "",
+            Bills: "",
             ProfilePage: "",
           };
 
@@ -79,13 +75,13 @@ const TabNav = () => {
         // options={({ route }) => console.log(route)}
       />
       <Tab.Screen
-        name="AppointmentsPage"
-        component={AppointmentsScreen}
+        name="Bills"
+        component={BillsScreen}
         // options={{ headerShown: false }}
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileStack}
+        component={ProfilePage}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

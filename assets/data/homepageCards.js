@@ -15,16 +15,16 @@ export default [
   },
   {
     id: "3",
-    cardTitle: "Bill",
-    cardSubTitle: "All your bills",
+    cardTitle: "Appointments",
+    cardSubTitle: "All your Appointments",
     cardIcon: require("./../images/bills.png"),
-    cardScreen: "BillScreen",
+    cardScreen: "AppointmentStack",
   },
   {
     id: "4",
     cardTitle: "Prescription",
     cardSubTitle: "Get doctor's prescription",
     cardIcon: require("./../images/prescriptions.png"),
-    cardScreen: "Clinics",
+    cardScreen: "PrescriptionsStack",
   },
 ];

@@ -1,8 +1,15 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import { COLORS } from "../assets/constants";
 import { ClinicsScreen, DoctorProfileScreen, HomeScreen } from "../Screens";
+import AppointmentsList from "../Screens/AppointmentsScreen";
+import EditAccountPage from "../Screens/EditAccountPage";
+import MedicalFilesPage from "../Screens/MedicalFilesPage";
+import NotificationsPage from "../Screens/NotificationsPage";
+import SupportingPage from "../Screens/SupportingPage";
 import ClinicsStack from "./ClinicsStack";
 import DoctorsStack from "./DoctorsStack";
+import PrescriptionsStack from "./PrescriptionsStack";
 import TabNav from "./TabNav";
 
 const Stack = createStackNavigator();
@@ -23,6 +30,60 @@ const HomeStack = () => {
         name="DoctorStack"
         component={DoctorsStack}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen name="AppointmentStack" component={AppointmentsList} />
+      <Stack.Screen
+        name="PrescriptionsStack"
+        component={PrescriptionsStack}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsPage}
+        options={{
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+            // height:120,
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="EditAccountPage"
+        component={EditAccountPage}
+        options={{
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+            // height:120,
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="MedicalFilesPage"
+        component={MedicalFilesPage}
+        options={{
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+            // height:120,
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="SupportingPage"
+        component={SupportingPage}
+        options={{
+          headerBackTitleVisible: false,
+          headerStyle: {
+            backgroundColor: COLORS.Main,
+            // height:120,
+          },
+          headerTintColor: "#fff",
+        }}
       />
     </Stack.Navigator>
   );
