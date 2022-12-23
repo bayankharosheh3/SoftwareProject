@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   TextInput,
@@ -16,27 +16,49 @@ import { COLORS } from "../../assets/constants";
 import { SignUpAlert } from "../../Components";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { SelectList } from "react-native-dropdown-select-list";
-
+import axios from "axios";
 const data1 = [
-  { key: "1", value: "Mobiles" },
-  { key: "2", value: "Appliances" },
-  { key: "3", value: "Cameras" },
+  { key: "1", value: "spesiality1" },
+  { key: "2", value: "spesiality2" },
+  { key: "3", value: "spesiality3" },
 ];
 function DoctorSignUp({ navigation }) {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [selected, setSelected] = useState("");
-
+  const [users, setUsers] = useState("");
   const [signUpWith, setSignUpWith] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password: "",
-    specialty: "",
+    Email: "",
+    Password: "",
+    Phonenumber: "",
+    Name: "",
+    Error: "",
+    Spesiality: "",
   });
 
-  const [value, setValue] = useState(null);
+  const [clinics, setClinics] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const getClinics = () => {
+    fetch("http://10.0.2.2:80/backend/spesialitylist.php")
+      .then((response) => response.json())
+      .then((json) => setClinics(json))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  };
 
+  useEffect(() => {
+    setLoading(true);
+    getClinics();
+  }, []);
+
+  const [value, setValue] = useState(null);
+  var Data = {
+    Email: signUpWith.Email,
+    Password: signUpWith.Password,
+    Spesiality: signUpWith.Spesiality,
+    Phonenumber: signUpWith.Phonenumber,
+    Name: signUpWith.Name,
+  };
   const renderItem = (item) => {
     return (
       <View style={styles.item}>
@@ -79,9 +101,9 @@ function DoctorSignUp({ navigation }) {
               <TextInput
                 placeholder={"Name"}
                 style={styles.input}
-                value={signUpWith.name}
+                value={signUpWith.Name}
                 onChangeText={(text) => {
-                  setSignUpWith({ ...signUpWith, name: text });
+                  setSignUpWith({ ...signUpWith, Name: text });
                 }}
               />
             </View>
@@ -91,10 +113,10 @@ function DoctorSignUp({ navigation }) {
             <View style={styles.container2_1}>
               <SelectList
                 setSelected={(val) =>
-                  setSignUpWith({ ...signUpWith, specialty: val })
+                  setSignUpWith({ ...signUpWith, Spesiality: val })
                 }
-                data={data1}
-                save="value"
+                data={clinics}
+                save="key"
                 boxStyles={styles.input2}
               />
             </View>
@@ -105,9 +127,9 @@ function DoctorSignUp({ navigation }) {
               <TextInput
                 placeholder={"Email"}
                 style={styles.input}
-                value={signUpWith.email}
+                value={signUpWith.Email}
                 onChangeText={(text) => {
-                  setSignUpWith({ ...signUpWith, email: text });
+                  setSignUpWith({ ...signUpWith, Email: text });
                 }}
               />
             </View>
@@ -119,9 +141,9 @@ function DoctorSignUp({ navigation }) {
                 placeholder={" Mobile Number"}
                 style={styles.input}
                 keyboardType="numeric"
-                value={signUpWith.phone}
+                value={signUpWith.Phonenumber}
                 onChangeText={(text) => {
-                  setSignUpWith({ ...signUpWith, phone: text });
+                  setSignUpWith({ ...signUpWith, Phonenumber: text });
                 }}
               />
             </View>
@@ -133,9 +155,9 @@ function DoctorSignUp({ navigation }) {
                 placeholder={"Password"}
                 secureTextEntry={true}
                 style={styles.input}
-                value={signUpWith.password}
+                value={signUpWith.Password}
                 onChangeText={(text) => {
-                  setSignUpWith({ ...signUpWith, password: text });
+                  setSignUpWith({ ...signUpWith, Password: text });
                 }}
               />
             </View>
@@ -149,15 +171,35 @@ function DoctorSignUp({ navigation }) {
             <TouchableOpacity
               style={styles.signUpBtn}
               onPress={() => {
+                var checkEmail = RegExp(
+                  /^\w+([\.-]?\w+)*dr@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+                );
                 if (
-                  signUpWith.name === "" ||
-                  signUpWith.email === "" ||
-                  signUpWith.phone === "" ||
-                  signUpWith.password === ""
+                  signUpWith.Name === "" ||
+                  signUpWith.Email === "" ||
+                  signUpWith.Phonenumber === "" ||
+                  signUpWith.Password === ""
                 ) {
                   setError("error,fill all inputs please");
+                } else if (!checkEmail.test(signUpWith.Email)) {
+                  setError("Enter a valid email address");
+                } else if (signUpWith.Password.length < 8) {
+                  setError("Minimum 08 characters required!!!");
+                } else if (/[ ]/.test(signUpWith.Password)) {
+                  setError("Don't include space in password!!!");
                 } else {
-                  setShow(true);
+                  axios
+                    .post("http://10.0.2.2:80/backend/signup_doctor.php", Data)
+                    .then((response) => response.data)
+                    .then((json) => {
+                      setError(json);
+                      if (json == "Complete") {
+                        setShow(true);
+                      }
+                    })
+                    .catch((error) => console.error(error))
+                    .finally(() => setLoading(false));
+
                   console.log(signUpWith);
                   setError("");
                 }

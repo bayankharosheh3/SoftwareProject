@@ -36,11 +36,45 @@ export default class SignInScreen extends Component {
     var Email = this.state.Email;
     var Password = this.state.Password;
     var checkEmail = RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
-
+    var checkEmaildoctor = RegExp(
+      /^\w+([\.-]?\w+)*dr@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+    );
     if (Email.length == 0 || Password.length == 0) {
       this.setState({ Error: "error,fill all inputs please" });
-    } else if (!checkEmail.test(Email)) {
+    } else if (!checkEmail.test(Email) && !checkEmaildoctor.test(Email)) {
       this.setState({ Error: "Enter a valid email address" });
+    } else if (checkEmaildoctor.test(Email)) {
+      var APIURL = "http://10.0.2.2:80/backend/signin_doctor.php";
+
+      var headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      };
+
+      var Data = {
+        Email: Email,
+        Password: Password,
+      };
+
+      fetch(APIURL, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(Data),
+      })
+        .then((Response) => Response.json())
+        .then((Response) => {
+          this.setState({ Error: Response[0].Message });
+
+          if (Response[0].Message == "Success") {
+            console.log("true");
+            this.props.route.params.loggedInFun(true);
+            this.props.route.params.setLoggedInAs("doctor");
+          }
+          console.log(Data);
+        })
+        .catch((error) => {
+          console.error("ERROR FOUND" + error);
+        });
     } else {
       var APIURL = "http://10.0.2.2:80/backend/signin.php";
 
