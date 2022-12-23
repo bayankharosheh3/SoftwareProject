@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import messages from "../../assets/data/messages";
+import messages from "../assets/data/messages";
 
 const NotificationsPage = () => {
   return (
@@ -21,8 +21,8 @@ const NotificationsPage = () => {
               <View style={styles.Container}>
                 <Text style={styles.notificationTitle}>title</Text>
                 <Text style={styles.notificationDesc}>
-                  information informationinformation
-                  informationinformationinformationinformationinformation
+                  information information information
+                  information information informationinformationinformation
                 </Text>
               </View>
             </View>

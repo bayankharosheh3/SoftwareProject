@@ -1,10 +1,10 @@
 import ChatPage from "../../Screens/ChatScreen";
 import AppointmentsPage from "./AppointmentsPage";
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "../../Screens/ProfilePage";
 import BookingSuccessPage from "../../Screens/BookingSuccessPage";
-import MedicalFilesPage from "./MedicalFilesPage";
-import NotificationsPage from "./NotificationsPage";
-import SupportingPage from "./SupportingPage";
+import MedicalFilesPage from "../../Screens/MedicalFilesPage";
+import NotificationsPage from "../../Screens/NotificationsPage";
+import SupportingPage from "../../Screens/SupportingPage";
 
 export {
   ChatPage,

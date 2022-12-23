@@ -9,7 +9,7 @@ import {
 import React from "react";
 import * as DocumentPicker from "expo-document-picker";
 import { TextInput } from "react-native-gesture-handler";
-import { COLORS } from "../../assets/constants";
+import { COLORS } from "../assets/constants";
 import { useState } from "react";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     fontSize: 14,
     color: "#8f9bb3",
-    paddingRight:10,
+    paddingRight: 10,
   },
   label2: {
     width: "60%",

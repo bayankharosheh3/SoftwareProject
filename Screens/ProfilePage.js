@@ -7,18 +7,23 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
-import { COLORS } from "../../assets/constants";
+import React, { useContext } from "react";
+import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
-import messages from "../../assets/data/messages";
-import LogoutAlert from "../LogoutAlert";
+import messages from "../assets/data/PmyProfiledata";
+import LogoutAlert from "../Components/LogoutAlert";
 import { useState } from "react";
-import EditAccountConfirm from "../EditAccountConfirm";
-import ChangePassword from "../ChangePassword";
-import SuccessAlert from "../SuccessAlert";
+import EditAccountConfirm from "../Components/EditAccountConfirm";
+import ChangePassword from "../Components/ChangePassword";
+import SuccessAlert from "../Components/SuccessAlert";
+import { RoutingData } from "../Components/Context/RoutingDataProvider";
 
 const ProfilePage = ({ navigation }) => {
   const [show, setShow] = useState("none");
+  const [move, setMove] = useState(false);
+
+  const loggedInData = useContext(RoutingData);
+
   // console.log(navigation.navigate('Notifications'))
   return (
     <View style={styles.mainContainer}>
@@ -46,7 +51,7 @@ const ProfilePage = ({ navigation }) => {
           <View style={styles.infoContainer}>
             <View style={styles.imgView}>
               <Image
-                source={require("./../../assets/images/1.jpg")}
+                source={require("./../assets/images/1.jpg")}
                 style={styles.imgProfile}
               ></Image>
             </View>
@@ -87,14 +92,23 @@ const ProfilePage = ({ navigation }) => {
                 // onPress={() => {
                 //   setShow("flex");
                 // }}
-                onPress={() => navigation.navigate("MedicalFilesPage")}
+                onPress={() => {
+                  if (item.id === "1" || item.id === "2") {
+                    navigation.navigate(item.navigator);
+                  } else if (item.id === "3") {
+                    setShow("flex");
+                  } else if (item.id === "4") {
+                    loggedInData.setLoggedIn(false);
+                    loggedInData.setLoggedInAs("");
+                  }
+                }}
               >
                 <View style={styles.listItem}>
                   <View style={styles.containerItem}>
                     <View style={styles.itemIconView}>
                       <FontAwesome5Icons name="file" style={styles.itemIcon} />
                     </View>
-                    <Text style={styles.itemTitle}>Appointments</Text>
+                    <Text style={styles.itemTitle}>{item.tabName}</Text>
                     <FontAwesome5Icons
                       name="chevron-right"
                       style={styles.itemArrow}
@@ -117,7 +131,8 @@ const ProfilePage = ({ navigation }) => {
           position: "absolute",
         }}
       >
-        {/* <SuccessAlert fun={setShow} /> */}
+        <ChangePassword fun={setShow} />
+        {/* <EditAccountConfirm fun={setShow} setMove={setMove} /> */}
       </View>
     </View>
   );

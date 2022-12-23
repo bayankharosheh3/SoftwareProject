@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import data from "./../../assets/data/supportingData";
-import Accordian from "../Accordion";
+import data from "../assets/data/supportingData";
+import Accordian from "../Components/Accordion";
 
 const SupportingPage = () => {
   console.log(data);

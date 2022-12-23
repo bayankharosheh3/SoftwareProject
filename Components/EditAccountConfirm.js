@@ -9,7 +9,7 @@ import React from "react";
 import { COLORS } from "../assets/constants";
 import { useState } from "react";
 
-const EditAccountConfirm = ({ fun }) => {
+const EditAccountConfirm = ({ fun, setMove }) => {
   const [toEdit, setToEdit] = useState({
     email: null,
     password: null,
@@ -41,7 +41,15 @@ const EditAccountConfirm = ({ fun }) => {
           <TouchableOpacity
             style={styles.logoutBtn}
             onPress={() => {
-              console.log(toEdit);
+              if ((toEdit.email == "bayan") & (toEdit.password == "1234")) {
+                // if email & password correct setMove(true)
+                setMove(true);
+                fun("none");
+              } else {
+                console.log("try again");
+                setMove(false);
+                fun("none");
+              }
             }}
           >
             <Text style={styles.logoutBtnText}>confirm</Text>
@@ -51,6 +59,7 @@ const EditAccountConfirm = ({ fun }) => {
             onPress={() => {
               setToEdit({ ...toEdit, email: "", password: "" });
               fun("none");
+              setMove(false);
             }}
           >
             <Text style={styles.cancelBtnText}>CANCEL</Text>
@@ -73,8 +82,9 @@ const styles = StyleSheet.create({
   },
   confirmMassage: {
     backgroundColor: "white",
-    flex: 0.8,
+    // flex: 0.8,
     width: "90%",
+    height: "100%",
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",

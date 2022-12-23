@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
-import tabs from "../assets/data/doctorProfileTabs";
+import tabs from "../assets/data/PdoctorProfileTabs";
 
 const DoctorProfileScreen = ({navigation,route}) => {
 

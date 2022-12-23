@@ -10,7 +10,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { COLORS } from "../../assets/constants";
+import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { useRef } from "react";
 
@@ -55,7 +55,7 @@ const EditAccountPage = () => {
     if (info.img !== "") {
       return { uri: info.img };
     } else {
-      return require("./../../assets/images/1.jpg");
+      return require("./../assets/images/1.jpg");
     }
   };
 

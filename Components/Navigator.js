@@ -7,8 +7,8 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { COLORS } from "../assets/constants";
 import MessagesPage from "../Screens/MessagesScreen";
 import NotificationsPage from "./Pages/NotificationsPage";
-import EditAccountPage from "./Pages/EditAccountPage";
-import SupportingPage from "./Pages/SupportingPage";
+import EditAccountPage from "../Screens/EditAccountPage";
+import SupportingPage from "../Screens/SupportingPage";
 import {
   ClinicDoctorsScreen,
   ClinicsScreen,

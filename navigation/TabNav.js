@@ -11,6 +11,7 @@ import MessagesScreen from "../Screens/MessagesScreen";
 import MessageStack from "./MessageStack";
 import AppointmentsScreen from "../Screens/BookAppointmentScreen";
 import { HomeScreen } from "../Screens";
+import ProfileStack from "./ProfileStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ const TabNav = () => {
             HomeScreen: "home",
             MessagesPage: "comment-medical",
             AppointmentsPage: "calendar-alt",
-            ProfilePage: "user-alt",
+            Profile: "user-alt",
           };
           return (
             <FontAwesome5Icons
@@ -83,8 +84,8 @@ const TabNav = () => {
         // options={{ headerShown: false }}
       />
       <Tab.Screen
-        name="ProfilePage"
-        component={ProfilePage}
+        name="Profile"
+        component={ProfileStack}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>

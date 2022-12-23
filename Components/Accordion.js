@@ -9,6 +9,7 @@ import {
   UIManager,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { COLORS } from "../assets/constants";
 
 export default class Accordian extends Component {
   constructor(props) {
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     paddingRight: 18,
     alignItems: "center",
-    backgroundColor: 'gray',
+    backgroundColor: COLORS.Background,
   },
   parentHr: {
     height: 1,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   child: {
-    backgroundColor: 'pink',
+    backgroundColor: COLORS.Background,
     padding: 16,
   },
 });
