@@ -3,6 +3,7 @@ import React from "react";
 import { ClinicDoctorsScreen, ClinicsScreen } from "../Screens";
 import BookAppointmentScreen from "../Screens/BookAppointmentScreen";
 import BookingSuccessPage from "../Screens/BookingSuccessPage";
+import ChatScreen from "../Screens/ChatScreen";
 import DoctorProfileScreen from "../Screens/DoctorProfileScreen";
 import Bill from "../Screens/Payment";
 import ReviewsScreen from "../Screens/ReviewsScreen";
@@ -82,6 +83,17 @@ const ClinicsStack = () => {
         component={BookingSuccessPage}
         options={{
           headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={({ route }) => {
+          console.log(route);
+          return {
+            title: route.params.userName,
+            headerBackTitleVisible: false,
+          };
         }}
       />
     </Stack.Navigator>

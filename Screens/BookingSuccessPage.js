@@ -3,31 +3,36 @@ import React, { useContext } from "react";
 import { COLORS } from "../assets/constants";
 import { RoutingData } from "../Components/Context/RoutingDataProvider";
 
-const BookingSuccessPage = ({route,navigation}) => {
+const BookingSuccessPage = ({ route, navigation }) => {
   const dataSignIn = useContext(RoutingData);
-  console.log(route.params.payment)
-  console.log(route.params.doctorId)
-  console.log(route.params.appId)
-  console.log(dataSignIn.userId)
+  console.log(route.params.payment);
+  console.log(route.params.doctorId);
+  console.log(route.params.appId);
+  console.log(dataSignIn.userId);
 
   return (
-    <View style={styles.mainContainer}>
-      <Image
-        source={require("../assets/images/bookingsucessfuly.jpg")}
-        style={styles.imgSuccess}
-      />
-      <Text style={styles.title}>Booking Successful</Text>
-      <Text style={styles.desc}>
-        Your booking has been Successful, the reminder is set automatically
-      </Text>
-      <TouchableOpacity>
-        <Text style={styles.details}>View Details</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.gotBtn}  onPress={() => {
+    <View style={styles.container}>
+      <View style={styles.mainContainer}>
+        <Image
+          source={require("../assets/images/bookingsucessfuly.jpg")}
+          style={styles.imgSuccess}
+        />
+        <Text style={styles.title}>Booking Successful</Text>
+        <Text style={styles.desc}>
+          Your booking has been Successful, the reminder is set automatically
+        </Text>
+        <TouchableOpacity>
+          <Text style={styles.details}>View Details</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.gotBtn}
+          onPress={() => {
             navigation.navigate("home");
-          }}>
-        <Text style={styles.got}>GOT IT</Text>
-      </TouchableOpacity>
+          }}
+        >
+          <Text style={styles.got}>GOT IT</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -35,6 +40,13 @@ const BookingSuccessPage = ({route,navigation}) => {
 export default BookingSuccessPage;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   mainContainer: {
     flex: 1,
     width: "90%",
@@ -75,5 +87,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
   },
-  
 });

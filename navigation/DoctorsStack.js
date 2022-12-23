@@ -2,6 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import BookAppointmentScreen from "../Screens/BookAppointmentScreen";
 import BookingSuccessPage from "../Screens/BookingSuccessPage";
+import ChatScreen from "../Screens/ChatScreen";
 import DoctorList from "../Screens/DoctorList";
 import DoctorProfileScreen from "../Screens/DoctorProfileScreen";
 import Bill from "../Screens/Payment";
@@ -46,6 +47,17 @@ const DoctorsStack = () => {
         component={BookingSuccessPage}
         options={{
           headerBackTitleVisible: false,
+        }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={({ route }) => {
+          console.log(route);
+          return {
+            title: route.params.userName,
+            headerBackTitleVisible: false,
+          };
         }}
       />
     </Stack.Navigator>
