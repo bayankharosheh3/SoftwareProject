@@ -58,7 +58,7 @@ export function Upcoming({ navigation }) {
                       })
                     }
                   >
-                    <Image source={chat} style={styles.image} />
+                    <Text>cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>

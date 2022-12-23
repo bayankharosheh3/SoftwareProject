@@ -13,16 +13,12 @@ import greenarrow from "../assets/images/greenarrow.png";
 import { COLORS } from "../assets/constants";
 // definition of the Item, which will be rendered in the FlatList
 const Item = ({ name, details, navigation }) => (
-  <TouchableOpacity
-    onPress={() => {
-      navigation.navigate("ClinicDoctors");
-    }}
-  >
+  <View>
     <View style={styles.item}>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.details}>{details}</Text>
     </View>
-  </TouchableOpacity>
+  </View>
 );
 
 // the filter
@@ -33,12 +29,7 @@ const BillsList = ({ searchPhrase, setCLicked, data, navigation }) => {
     if (searchPhrase === "") {
       return (
         <View style={styles.container0}>
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate("Prescription", { clinicId: item.clinic_id })
-            }
-          >
+          <View style={styles.card}>
             <View style={styles.userInfo}>
               <View style={styles.userImgWrapper}>
                 <Image style={styles.userImg} source={{ uri: item.image }} />
@@ -62,7 +53,7 @@ const BillsList = ({ searchPhrase, setCLicked, data, navigation }) => {
                 </View>
               </View>
             </View>
-          </TouchableOpacity>
+          </View>
         </View>
       );
     }

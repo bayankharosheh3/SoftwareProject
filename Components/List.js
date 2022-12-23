@@ -56,7 +56,7 @@ const Item = ({ name, details, navigation }) => (
 );
 
 // the filter
-const List = ({ searchPhrase, setCLicked, data }) => {
+const List = ({ searchPhrase, setCLicked, data , navigation}) => {
   const renderItem = ({ item }) => {
     // when no input, show all
     if (searchPhrase === "") {
