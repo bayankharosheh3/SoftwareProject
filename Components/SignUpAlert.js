@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { COLORS } from "../assets/constants";
 
-const SignUpAlert = ({ fun,fun2 }) => {
+const SignUpAlert = ({ fun, fun2, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.confirmMassage}>
@@ -24,6 +24,7 @@ const SignUpAlert = ({ fun,fun2 }) => {
               phone: "",
               password: "",
             });
+            navigation.replace("SignInScreen");
           }}
         >
           <Text style={styles.logoutBtnText}>got it</Text>

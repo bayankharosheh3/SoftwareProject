@@ -219,7 +219,7 @@ function DoctorSignUp({ navigation }) {
         </ScrollView>
       </TouchableWithoutFeedback>
       <View style={[styles.container4, { display: show ? "flex" : "none" }]}>
-        <SignUpAlert fun={setShow} fun2={setSignUpWith} />
+        <SignUpAlert fun={setShow} fun2={setSignUpWith} navigation={navigation}/>
       </View>
     </>
   );
