@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 
 // screens
 import { HomeScreen, MainScreen, SplashScreen } from "./Screens";
-import ReviewsScreen from "./Screens/ReviewsScreen";
 import RoutingDataProvider from "./Components/Context/RoutingDataProvider";
+import DoctorSchedule from "./Screens/DoctorsScreens/DoctorSchedule";
 
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -22,8 +22,8 @@ const App = () => {
     <RoutingDataProvider>
       <View style={styles.mainContainer}>
         <StatusBar />
-        {changeScreen ? <MainScreen /> : <SplashScreen />}
-        {/* <ReviewsScreen/> */}
+        {/* {changeScreen ? <MainScreen /> : <SplashScreen />} */}
+        <DoctorSchedule/>
       </View>
     </RoutingDataProvider>
   );

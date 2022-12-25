@@ -1,55 +1,71 @@
-import { Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import React from "react";
 import { Calendar } from "react-native-calendars";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { COLORS } from "../../assets/constants";
-import { AntDesign } from "@expo/vector-icons";
-import axios from "axios";
+import { Card, Avatar } from "react-native-paper";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useRef } from "react";
+
 const DoctorSchedule = ({ navigation, route }) => {
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedAppointment, setSelectedAppointment] = useState({
-    day: "",
-    hour: "",
+  const [selectedDay, setSelectedDay] = useState();
+  const [selectedTime, setSelectedTime] = useState();
+  const [hours, setHours] = useState([]);
+
+  const [appointments, setAppointments] = useState([]);
+  // const [filtered, setFiltered] = useState([]);
+
+  const id = useRef(0);
+  const filtered = appointments.filter((appointment) => {
+    return appointment.day === selectedDay;
   });
+
+  //
+  const [date, setDate] = useState(new Date());
+  const mode = "time";
+  const [show, setShow] = useState(false);
+  const [date1, setDate1] = useState(new Date());
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+
+    let temp = new Date(currentDate);
+    let time = temp.getHours() + ":" + temp.getMinutes() + ":00";
+    setAppointments([
+      ...appointments,
+      { id: id.current++, day: selectedDay, hour: time },
+    ]);
+    console.log(appointments);
+  };
 
   const availableDates = [
     {
-      date: "2022-12-13",
+      date: "2023-01-13",
       hours: ["11:00", "11:30", "15:00", "12:30", "13:00", "14:30"],
     },
     {
-      date: "2022-12-14",
-      hours: ["11:00", "11:30", "1r:00", "12:30", "13:00", "14:30"],
+      date: "2023-01-14",
+      hours: ["11:00", "11:30", "11:00", "12:30", "13:00", "14:30"],
     },
     {
-      date: "2022-12-15",
+      date: "2023-01-15",
       hours: ["11:00", "11:30", "12:30", "12:30", "13:00", "14:30"],
     },
-    {
-      date: "2022-12-25",
-      hours: ["11:00", "11:30", "12:00", "12:30", "13:00", "14:30"],
-    },
-    {
-      date: "2022-12-27",
-      hours: ["11:00", "11:30", "12:00", "12:30", "13:00", "14:30"],
-    },
   ];
-
-  const selectedDay = availableDates.find((date) => date.date === selectedDate);
-
-  const booking = (day, hour) => {
-    setSelectedAppointment({
-      day: day,
-      hour: hour,
-    });
-  };
-  console.log(selectedAppointment);
 
   //custom
   var customMarkedDate = {};
 
   availableDates.map((day) => {
-    customMarkedDate[day.date] = {
+    customMarkedDate[selectedDay] = {
       selected: true,
       selectedColor: COLORS.Main,
     };
@@ -72,7 +88,10 @@ const DoctorSchedule = ({ navigation, route }) => {
             marginVertical: 20,
             width: "100%",
           }}
-          onDayPress={(date) => setSelectedDate(date.dateString)}
+          onDayPress={(date) => {
+            setSelectedDay(date.dateString);
+            console.log(date.dateString);
+          }}
           markingType={"custom"}
           minDate={start}
           hideExtraDays={true}
@@ -86,16 +105,82 @@ const DoctorSchedule = ({ navigation, route }) => {
         />
       </View>
       <View style={styles.btnCont}>
-        {selectedDay &&
-          selectedDay.hours.map((hour) => (
-            <TouchableOpacity
-              onPress={() => booking(selectedDay.date, hour)}
-              style={styles.btn}
-              activeOpacity={0.6}
-            >
-              <Text style={styles.txt}>{hour}</Text>
-            </TouchableOpacity>
-          ))}
+        <TouchableOpacity
+          style={{ marginRight: 10, marginTop: 17 }}
+          onPress={() => setShow(!show)}
+        >
+          <Card>
+            <Card.Content>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Text>add</Text>
+              </View>
+            </Card.Content>
+          </Card>
+        </TouchableOpacity>
+
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={
+              new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDay(),
+                date1.getHours(),
+                date1.getMinutes()
+              )
+            }
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={onChange}
+          />
+        )}
+
+        <FlatList
+          data={filtered}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View>
+              <TouchableOpacity
+                style={{ marginRight: 10, marginTop: 17 }}
+                onPress={() => setShow(!show)}
+              >
+                <Card>
+                  <Card.Content>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Text>{item.hour}</Text>
+                    </View>
+                  </Card.Content>
+                </Card>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  const newArray = appointments.filter(
+                    (appointment) => appointment.id !== item.id
+                  );
+                  setAppointments(newArray);
+                }}
+              >
+                <Text>delete</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
+
+        
       </View>
     </View>
   );
