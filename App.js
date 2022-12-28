@@ -22,8 +22,7 @@ const App = () => {
     <RoutingDataProvider>
       <View style={styles.mainContainer}>
         <StatusBar />
-        {/* {changeScreen ? <MainScreen /> : <SplashScreen />} */}
-        <DoctorSchedule/>
+        {changeScreen ? <MainScreen /> : <SplashScreen />}
       </View>
     </RoutingDataProvider>
   );

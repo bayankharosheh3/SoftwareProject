@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  ScrollView,
 } from "react-native";
 import React from "react";
 import { Calendar } from "react-native-calendars";
@@ -12,12 +13,11 @@ import { COLORS } from "../../assets/constants";
 import { Card, Avatar } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useRef } from "react";
+import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const DoctorSchedule = ({ navigation, route }) => {
-  const [selectedDay, setSelectedDay] = useState();
-  const [selectedTime, setSelectedTime] = useState();
-  const [hours, setHours] = useState([]);
-
+  const [selectedDay, setSelectedDay] = useState("");
   const [appointments, setAppointments] = useState([]);
   // const [filtered, setFiltered] = useState([]);
 
@@ -27,23 +27,38 @@ const DoctorSchedule = ({ navigation, route }) => {
   });
 
   //
-  const [date, setDate] = useState(new Date());
+  const date = new Date();
   const mode = "time";
   const [show, setShow] = useState(false);
   const [date1, setDate1] = useState(new Date());
+  const [edit, setEdit] = useState(null);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
-    setDate(currentDate);
+    // setDate(currentDate);
 
     let temp = new Date(currentDate);
     let time = temp.getHours() + ":" + temp.getMinutes() + ":00";
-    setAppointments([
-      ...appointments,
-      { id: id.current++, day: selectedDay, hour: time },
-    ]);
-    console.log(appointments);
+    if (edit !== null) {
+      const objIndex = appointments.findIndex((obj) => obj.id == edit);
+      appointments[objIndex].hour = time;
+      setEdit(null);
+    } else {
+      setAppointments([
+        ...appointments,
+        {
+          id: id.current++,
+          day: selectedDay,
+          hour: time,
+          hours: temp.getHours(),
+          min: temp.getMinutes(),
+        },
+      ]);
+    }
+
+    console.log(temp.getHours());
+    console.log(temp.getMinutes());
   };
 
   const availableDates = [
@@ -64,11 +79,24 @@ const DoctorSchedule = ({ navigation, route }) => {
   //custom
   var customMarkedDate = {};
 
-  availableDates.map((day) => {
-    customMarkedDate[selectedDay] = {
-      selected: true,
-      selectedColor: COLORS.Main,
-    };
+  var coloredDay = [selectedDay];
+
+  appointments.map((appointment) => {
+    coloredDay = [...coloredDay, appointment.day];
+  });
+
+  coloredDay.map((day) => {
+    if (day == selectedDay) {
+      customMarkedDate[day] = {
+        selected: true,
+        selectedColor: COLORS.Main,
+      };
+    } else {
+      customMarkedDate[day] = {
+        selected: true,
+        selectedColor: COLORS.Main + "110",
+      };
+    }
   });
 
   const currentDate = new Date();
@@ -79,7 +107,7 @@ const DoctorSchedule = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>choose the preferred day ...</Text>
+      <Text style={styles.title}>select the preferred day ...</Text>
       <View>
         <Calendar
           style={{
@@ -104,84 +132,132 @@ const DoctorSchedule = ({ navigation, route }) => {
           }}
         />
       </View>
-      <View style={styles.btnCont}>
-        <TouchableOpacity
-          style={{ marginRight: 10, marginTop: 17 }}
-          onPress={() => setShow(!show)}
-        >
-          <Card>
-            <Card.Content>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Text>add</Text>
-              </View>
-            </Card.Content>
-          </Card>
-        </TouchableOpacity>
+      {selectedDay && (
+        <View style={styles.btnCont}>
+          <TouchableOpacity
+            style={[{ marginRight: 10, marginTop: 1 }]}
+            onPress={() => {
+              setShow(true);
+              console.log(true);
+            }}
+          >
+            <Card style={{ backgroundColor: COLORS.Main }}>
+              <Card.Content>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={{ color: "white" }}>Add</Text>
+                </View>
+              </Card.Content>
+            </Card>
+          </TouchableOpacity>
 
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={
-              new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDay(),
-                date1.getHours(),
-                date1.getMinutes()
-              )
-            }
-            mode={mode}
-            is24Hour={true}
-            display="default"
-            onChange={onChange}
-          />
-        )}
+          <TouchableOpacity
+            style={{
+              marginRight: 10,
+              marginTop: 1,
+            }}
+            onPress={() => {
+              const newArray = appointments.filter(
+                (appointment) => appointment.day !== selectedDay
+              );
+              setAppointments(newArray);
+            }}
+          >
+            <Card>
+              <Card.Content>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text>Delete</Text>
+                </View>
+              </Card.Content>
+            </Card>
+          </TouchableOpacity>
+        </View>
+      )}
 
-        <FlatList
-          data={filtered}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View>
-              <TouchableOpacity
-                style={{ marginRight: 10, marginTop: 17 }}
-                onPress={() => setShow(!show)}
-              >
-                <Card>
-                  <Card.Content>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date1}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+      <FlatList
+        style={{ flex: 1 }}
+        data={filtered}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View>
+            <Card style={{ marginRight: 10, marginTop: 10 }}>
+              <Card.Content>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text>{item.hour}</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        const newArray = appointments.filter(
+                          (appointment) => appointment.id !== item.id
+                        );
+                        setAppointments(newArray);
+                      }}
+                      style={{ marginRight: 12 }}
+                    >
+                      <MaterialIcons
+                        style={styles.delete}
+                        name="delete"
+                        size={24}
+                        color={COLORS.Main}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setDate1(
+                          new Date(
+                            date.getFullYear(),
+                            date.getMonth(),
+                            date.getDay(),
+                            item.hours,
+                            item.min
+                          )
+                        );
+
+                        console.log(date1);
+                        setEdit(item.id);
+                        setShow(true);
                       }}
                     >
-                      <Text>{item.hour}</Text>
-                    </View>
-                  </Card.Content>
-                </Card>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  const newArray = appointments.filter(
-                    (appointment) => appointment.id !== item.id
-                  );
-                  setAppointments(newArray);
-                }}
-              >
-                <Text>delete</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-
-        
-      </View>
+                      <FontAwesome5Icons
+                        name={"pen"}
+                        size={17}
+                        style={{ color: COLORS.Main }}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Card.Content>
+            </Card>
+          </View>
+        )}
+      />
     </View>
   );
 };
@@ -193,7 +269,8 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     paddingHorizontal: "5%",
-    paddingVertical: "20%",
+    paddingTop: "5%",
+    paddingBottom: "10%",
   },
   title: {
     fontSize: 20,
@@ -201,10 +278,12 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   btnCont: {
-    flex: 1,
+    flex: 0.2,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     flexWrap: "wrap",
+
+    // margin: 10,
   },
   btn: {
     backgroundColor: COLORS.Main,
@@ -212,7 +291,6 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingVertical: 14,
     width: "35%",
-    margin: 10,
   },
   txt: {
     color: COLORS.white,

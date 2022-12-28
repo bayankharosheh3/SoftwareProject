@@ -7,14 +7,14 @@ export default [
   },
   {
     id: "2",
-    tabName: "Book Appointment",
-    navigateTo: "BookAppointment",
+    tabName: "Medical Referral",
+    navigateTo: "Medical Referral",
 
     // userImg: require("../assets/users/user-1.jpg"),
   },
   {
     id: "3",
-    tabName: "Others Review",
+    tabName: "Medical Condition,",
     navigateTo: "Reviews",
     // userImg: require("../assets/users/user-4.jpg"),
   },

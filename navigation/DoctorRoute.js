@@ -36,6 +36,11 @@ const DoctorRoute = () => {
         component={PatientProfileScreen}
         // options={{ headerShown: false }}
       />
+       <Stack.Screen
+        name="Medical Referral"
+        component={ClinicsStack}
+        // options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Doctor Appointments"
         component={DoctorAppointments}
