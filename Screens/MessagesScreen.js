@@ -10,10 +10,19 @@ import {
 import React from "react";
 import messages from "../assets/data/messages";
 import { ScreenHeader } from "../Components";
+import { useLayoutEffect } from "react";
 // import { FlatList } from "react-native-gesture-handler";
 // import messages from "../assets/data/messages";
 
 const MessagesScreen = ({ navigation }) => {
+  useLayoutEffect(() => {
+    const hideUnsubscribe = navigation.addListener('focus', e => {
+      let parentNav = navigation.getParent();
+      parentNav.setOptions({
+        tabBarStyle: {display: 'flex'},
+      });
+    });
+  }, []);
   return (
     <View style={styles.mainContainer}>
       <ScreenHeader title={"Chat"} />

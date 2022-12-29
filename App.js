@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { HomeScreen, MainScreen, SplashScreen } from "./Screens";
 import RoutingDataProvider from "./Components/Context/RoutingDataProvider";
 import DoctorSchedule from "./Screens/DoctorsScreens/DoctorSchedule";
+import PatientHistory from "./Screens/PatientHistory";
 
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -22,7 +23,8 @@ const App = () => {
     <RoutingDataProvider>
       <View style={styles.mainContainer}>
         <StatusBar />
-        {changeScreen ? <MainScreen /> : <SplashScreen />}
+        {/* {changeScreen ? <MainScreen /> : <SplashScreen />} */}
+        <PatientHistory/>
       </View>
     </RoutingDataProvider>
   );

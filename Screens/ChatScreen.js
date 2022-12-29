@@ -3,9 +3,20 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Bubble, GiftedChat, Send } from "react-native-gifted-chat";
 import { COLORS } from "../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
+import { useLayoutEffect } from "react";
 
 const ChatScreen = ({ route, navigation }) => {
   const [messages, setMessages] = useState([]);
+
+   useLayoutEffect(() => {
+    const hideUnsubscribe = navigation.addListener('focus', e => {
+      let parentNav = navigation.getParent();
+      parentNav.setOptions({
+        tabBarStyle: {display: 'none'},
+      });
+    });
+  }, []);
+
 
   useEffect(() => {
     setMessages([

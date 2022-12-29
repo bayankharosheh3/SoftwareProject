@@ -196,12 +196,12 @@ const DoctorSchedule = ({ navigation, route }) => {
         />
       )}
       <FlatList
-        style={{ flex: 1 }}
+        style={{ flex: 1, marginBottom: 10 }}
         data={filtered}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View>
-            <Card style={{ marginRight: 10, marginTop: 10 }}>
+          <View style={{ marginVertical: 5 }}>
+            <Card style={{ marginRight: 10, marginTop: 5 }}>
               <Card.Content>
                 <View
                   style={{
