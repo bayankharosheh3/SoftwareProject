@@ -67,12 +67,12 @@ export default PatientHistory = ({ navigation }) => {
 
   const scrollTo = () => {
     console.log(currentIndex);
-    console.log(slides.length);
-    if (currentIndex < slides.length - 1) {
+    console.log(History.length);
+    if (currentIndex < History.length - 1) {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
       //   console.log(currentIndex);
     } else {
-      navigation.navigate("SignInScreen");
+      navigation.navigate("home");
     }
   };
 
@@ -86,7 +86,9 @@ export default PatientHistory = ({ navigation }) => {
           <View style={{ flex: 5 }}>
             <FlatList
               data={History}
-              renderItem={({ item }) => <HistoryPatientItem item={item} />}
+              renderItem={({ item }) => (
+                <HistoryPatientItem item={item} navigation={navigation} />
+              )}
               horizontal
               showsHorizontalScrollIndicator
               pagingEnabled

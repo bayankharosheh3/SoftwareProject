@@ -30,7 +30,7 @@ const HistoryPatientItem = ({ item, navigation }) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("SignInScreen")}
+          onPress={() => navigation.navigate("home")}
         >
           <Text style={styles.text}>Skip</Text>
         </TouchableOpacity>
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  text: { color: COLORS.white, fontSize: 20 },
+  text: { color: COLORS.white, fontSize: 15 },
   textContainer: {
     width: "90%",
     flex: 0.5,

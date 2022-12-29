@@ -6,6 +6,7 @@ import AppointmentsList from "../Screens/AppointmentsScreen";
 import EditAccountPage from "../Screens/EditAccountPage";
 import MedicalFilesPage from "../Screens/MedicalFilesPage";
 import NotificationsPage from "../Screens/NotificationsPage";
+import PatientHistory from "../Screens/PatientHistory";
 import StarRating from "../Screens/RatingScreen";
 import SupportingPage from "../Screens/SupportingPage";
 import ClinicsStack from "./ClinicsStack";
@@ -17,6 +18,11 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="PatientHistory"
+        component={PatientHistory}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="home"
         component={TabNav}

@@ -23,8 +23,7 @@ const App = () => {
     <RoutingDataProvider>
       <View style={styles.mainContainer}>
         <StatusBar />
-        {/* {changeScreen ? <MainScreen /> : <SplashScreen />} */}
-        <PatientHistory/>
+        {changeScreen ? <MainScreen /> : <SplashScreen />}
       </View>
     </RoutingDataProvider>
   );
