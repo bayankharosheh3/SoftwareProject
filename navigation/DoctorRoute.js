@@ -6,6 +6,7 @@ import DoctorEditAccount from "../Screens/DoctorsScreens/DoctorEditAccount";
 import DoctorFiles from "../Screens/DoctorsScreens/DoctorFiles";
 import DoctorHome from "../Screens/DoctorsScreens/DoctorHome";
 import DoctorLabs from "../Screens/DoctorsScreens/DoctorLabs";
+import DoctorLabResult from "../Screens/DoctorsScreens/DoctorLabResult";
 import DoctorNotifications from "../Screens/DoctorsScreens/DoctorNotifications";
 import DoctorPrescription from "../Screens/DoctorsScreens/DoctorPrescription";
 import DoctorReviews from "../Screens/DoctorsScreens/DoctorReviews";
@@ -84,6 +85,11 @@ const DoctorRoute = () => {
       <Stack.Screen
         name="Labs"
         component={DoctorLabs}
+        // options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Lab Result"
+        component={DoctorLabResult}
         // options={{ headerShown: false }}
       />
     </Stack.Navigator>

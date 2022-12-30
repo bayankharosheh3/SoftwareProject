@@ -49,8 +49,8 @@ const LabsList = ({ searchPhrase, setCLicked, data, navigation }) => {
                   <TouchableOpacity
                     style={styles.arrowimg}
                     onPress={() => {
-                      navigation.navigate("clinic_doctors", {
-                        userName: item.clinic_name,
+                      navigation.navigate("Lab Result", {
+                        id: "labId",
                       });
                     }}
                   >
