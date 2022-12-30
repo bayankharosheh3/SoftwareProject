@@ -1,12 +1,21 @@
-import { Modal, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import React from "react";
 import { Calendar } from "react-native-calendars";
 import { useState, useEffect } from "react";
 import { COLORS } from "../assets/constants";
 import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
-const BookAppointmentScreen = ({ navigation,route }) => {
-  console.log(route.params.doctorId)
+const BookAppointmentScreen = ({ navigation, route }) => {
+  console.log(route.params.doctorId);
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState();
   const [selectedAppointment, setSelectedAppointment] = useState({
@@ -131,7 +140,14 @@ const BookAppointmentScreen = ({ navigation,route }) => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("Payment", { appId: "appid",doctorId:route.params.doctorId });
+            if (chosen.time == "") {
+              setModalVisible(true);
+            } else {
+              navigation.navigate("Payment", {
+                appId: "appid",
+                doctorId: route.params.doctorId,
+              });
+            }
           }}
           style={styles.nextbtn}
           activeOpacity={0.6}
@@ -143,6 +159,29 @@ const BookAppointmentScreen = ({ navigation,route }) => {
             </View>
           </View>
         </TouchableOpacity>
+      </View>
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Book appointment please!</Text>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Ok</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </View>
     </View>
   );
@@ -211,17 +250,65 @@ const styles = StyleSheet.create({
     padding: 2,
   },
   nextCont: {
-    flexDirection:'row',
+    flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
   },
-  chosen:{
+  chosen: {
     justifyContent: "space-between",
   },
-  txtchosen:{
+  txtchosen: {
     // textAlign:'left',
     color: COLORS.Main,
     fontSize: 16,
     fontWeight: "600",
-  }
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    // backgroundColor:'red'
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: 200,
+    height: 200,
+    paddingTop:35,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    width: 80,
+    marginTop:25,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize:16,
+  },
 });

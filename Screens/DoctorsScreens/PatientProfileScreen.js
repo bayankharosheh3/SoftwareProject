@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   FlatList,
   Image,
@@ -6,14 +6,16 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Modal,
+  Alert,
 } from "react-native";
 import { COLORS } from "../../assets/constants";
 import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import tabs from "../../assets/data/DPatientProfileTabs";
 
-const PatientProfileScreen = ({navigation,route}) => {
-
-  console.log(route.params.doctorId)
+const PatientProfileScreen = ({ navigation, route }) => {
+  console.log(route.params.doctorId);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.mainContainer}>
@@ -69,7 +71,15 @@ const PatientProfileScreen = ({navigation,route}) => {
               // onPress={() => {
               //   setShow("flex");
               // }}
-              onPress={() => navigation.navigate(item.navigateTo,{doctorId:route.params.doctorId})}
+              onPress={() => {
+                if (item.id == "3") {
+                  setModalVisible(!modalVisible);
+                } else {
+                  navigation.navigate(item.navigateTo, {
+                    doctorId: route.params.doctorId,
+                  });
+                }
+              }}
             >
               <View style={styles.listItem}>
                 <View style={styles.containerItem}>
@@ -87,6 +97,29 @@ const PatientProfileScreen = ({navigation,route}) => {
           )}
         />
       </View>
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Are you sure you want delete</Text>
+              <TouchableOpacity
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Yes</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      </View>
     </View>
   );
 };
@@ -100,6 +133,7 @@ const styles = StyleSheet.create({
     height: "100%",
     position: "relative",
     alignItems: "center",
+    justifyContent: "center",
   },
   column: {
     marginTop: 120,
@@ -239,8 +273,59 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   itemArrow: {
-    paddingRight:10,
+    paddingRight: 10,
     fontSize: 16,
     color: "#8f9bb3",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "80%",
+    marginLeft:'20%',
+
+    // backgroundColor:'red'
+    position: "absolute",
+  },
+  modalView: {
+    margin: 10,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    width: 200,
+    height: 200,
+    paddingTop: 35,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    width: 80,
+    marginTop: 25,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize: 16,
   },
 });
