@@ -9,6 +9,7 @@ import RoutingDataProvider from "./Components/Context/RoutingDataProvider";
 import DoctorSchedule from "./Screens/DoctorsScreens/DoctorSchedule";
 import PatientHistory from "./Screens/PatientHistory";
 import DoctorLabResult from "./Screens/DoctorsScreens/DoctorLabResult";
+import DoctorPatientHistory from "./Screens/DoctorsScreens/DoctorPatientHistory";
 
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -24,8 +25,8 @@ const App = () => {
     <RoutingDataProvider>
       <View style={styles.mainContainer}>
         <StatusBar />
-        {/* {changeScreen ? <MainScreen /> : <SplashScreen />} */}
-        <DoctorLabResult/>
+        {changeScreen ? <MainScreen /> : <SplashScreen />}
+        {/* <DoctorPatientHistory/> */}
       </View>
     </RoutingDataProvider>
   );

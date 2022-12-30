@@ -17,6 +17,7 @@ import PatientsScreen from "../Screens/DoctorsScreens/PatientsScreen";
 import ClinicsStack from "./ClinicsStack";
 import DoctorsStack from "./DoctorsStack";
 import DTabNav from "./DTabNav";
+import DoctorPatientHistory from "../Screens/DoctorsScreens/DoctorPatientHistory";
 
 const Stack = createStackNavigator();
 const DoctorRoute = () => {
@@ -90,6 +91,11 @@ const DoctorRoute = () => {
       <Stack.Screen
         name="Lab Result"
         component={DoctorLabResult}
+        // options={{ headerShown: false }}
+      />
+       <Stack.Screen
+        name="Patient History"
+        component={DoctorPatientHistory}
         // options={{ headerShown: false }}
       />
     </Stack.Navigator>

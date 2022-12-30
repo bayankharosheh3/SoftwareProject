@@ -1,7 +1,7 @@
 export default [
   {
     id: "1",
-    tabName: "Doctor Chat",
+    tabName: "Patient Chat",
     navigateTo: "Chat",
     // userImg: require("../assets/users/user-3.jpg"),
   },
@@ -14,8 +14,8 @@ export default [
   },
   {
     id: "3",
-    tabName: "Medical Condition,",
-    navigateTo: "Reviews",
+    tabName: "Patient History",
+    navigateTo: "Patient History",
     // userImg: require("../assets/users/user-4.jpg"),
   },
 ];
