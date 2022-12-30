@@ -8,10 +8,10 @@ export default [
   },
   {
     id: "2",
-    cardTitle: "Schedule",
-    cardSubTitle: "select your schedule",
+    cardTitle: "Reviews",
+    cardSubTitle: "see patients reviews",
     cardIcon: require("./../images/clinics.png"),
-    cardScreen: "Schedule",
+    cardScreen: "Doctor Reviews",
   },
   {
     id: "3",
@@ -27,11 +27,5 @@ export default [
     cardIcon: require("./../images/prescriptions.png"),
     cardScreen: "Labs",
   },
-  {
-    id: "5",
-    cardTitle: "Reviews",
-    cardSubTitle: "see patients reviews",
-    cardIcon: require("./../images/prescriptions.png"),
-    cardScreen: "Doctor Reviews",
-  },
+  
 ];

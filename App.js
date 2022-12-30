@@ -10,6 +10,8 @@ import DoctorSchedule from "./Screens/DoctorsScreens/DoctorSchedule";
 import PatientHistory from "./Screens/PatientHistory";
 import DoctorLabResult from "./Screens/DoctorsScreens/DoctorLabResult";
 import DoctorPatientHistory from "./Screens/DoctorsScreens/DoctorPatientHistory";
+import BillsScreen from "./Screens/BillsScreen";
+import Bill from "./Screens/Payment";
 
 const App = () => {
   const [changeScreen, setChangeScreen] = useState(false);
@@ -26,7 +28,6 @@ const App = () => {
       <View style={styles.mainContainer}>
         <StatusBar />
         {changeScreen ? <MainScreen /> : <SplashScreen />}
-        {/* <DoctorPatientHistory/> */}
       </View>
     </RoutingDataProvider>
   );

@@ -38,11 +38,6 @@ const DoctorRoute = () => {
         component={PatientProfileScreen}
         // options={{ headerShown: false }}
       />
-       <Stack.Screen
-        name="Medical Referral"
-        component={ClinicsStack}
-        // options={{ headerShown: false }}
-      />
       <Stack.Screen
         name="Doctor Appointments"
         component={DoctorAppointments}
@@ -93,7 +88,7 @@ const DoctorRoute = () => {
         component={DoctorLabResult}
         // options={{ headerShown: false }}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="Patient History"
         component={DoctorPatientHistory}
         // options={{ headerShown: false }}

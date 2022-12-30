@@ -9,6 +9,7 @@ import { HomeScreen } from "../Screens";
 import BillsScreen from "../Screens/BillsScreen";
 import DoctorHome from "../Screens/DoctorsScreens/DoctorHome";
 import DoctorProfile from "../Screens/DoctorsScreens/DoctorProfile";
+import DoctorSchedule from "../Screens/DoctorsScreens/DoctorSchedule";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +27,7 @@ const DTabNav = () => {
           const icons = {
             HomeScreen: "home",
             MessagesPage: "comment-medical",
-            Bills: "calendar-alt",
+            Schedule: "calendar-alt",
             Profile: "user-alt",
           };
           return (
@@ -45,7 +46,7 @@ const DTabNav = () => {
           const labels = {
             HomeScreen: "",
             ChatPage: "",
-            Bills: "",
+            Schedule: "",
             ProfilePage: "",
           };
 
@@ -76,8 +77,8 @@ const DTabNav = () => {
         // options={({ route }) => console.log(route)}
       />
       <Tab.Screen
-        name="Bills"
-        component={BillsScreen}
+        name="Schedule"
+        component={DoctorSchedule}
         // options={{ headerShown: false }}
       />
       <Tab.Screen

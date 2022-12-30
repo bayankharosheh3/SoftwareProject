@@ -12,11 +12,13 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import messages from "../../assets/data/DProfiledata";
 import { useState } from "react";
 import { RoutingData } from "../../Components/Context/RoutingDataProvider";
-import ChangePassword from "../../Components/ChangePassword";
 import DChangePassword from "../../Components/DoctorComponents/DChangePassword";
+import DBill from "../../Components/DoctorComponents/DBill";
 
 const DoctorProfile = ({ navigation }) => {
   const [show, setShow] = useState("none");
+  const [show2, setShow2] = useState("none");
+
   const [move, setMove] = useState(false);
 
   const loggedInData = useContext(RoutingData);
@@ -34,9 +36,7 @@ const DoctorProfile = ({ navigation }) => {
             >
               <FontAwesome5Icons name="bell" style={styles.titleIcon} />
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Supporting")}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Supporting")}>
               <FontAwesome5Icons name="cog" style={styles.titleIcon} />
             </TouchableOpacity>
           </View>
@@ -95,6 +95,8 @@ const DoctorProfile = ({ navigation }) => {
                   } else if (item.id === "3") {
                     setShow("flex");
                   } else if (item.id === "4") {
+                    setShow2("flex");
+                  } else if (item.id === "5") {
                     loggedInData.setLoggedIn(false);
                     loggedInData.setLoggedInAs("");
                   }
@@ -129,7 +131,17 @@ const DoctorProfile = ({ navigation }) => {
         }}
       >
         <DChangePassword fun={setShow} />
-        {/* <EditAccountConfirm fun={setShow} setMove={setMove} /> */}
+        <DBill fun={setShow2} />
+      </View>
+      <View
+        style={{
+          display: show2,
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+        }}
+      >
+        <DBill fun={setShow2} />
       </View>
     </View>
   );

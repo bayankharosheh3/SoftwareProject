@@ -14,6 +14,7 @@ import FontAwesome5Icons from "react-native-vector-icons/FontAwesome5";
 import { useState } from "react";
 import visa from "./../assets/images/visa.png";
 import cash from "./../assets/images/cash.png";
+import Visa from "../Components/Visa";
 const Bill = ({ navigation, route }) => {
   console.log(route.params.doctorId);
   console.log(route.params.appId);
@@ -30,11 +31,13 @@ const Bill = ({ navigation, route }) => {
     setTasks(tasks.filter((value, index) => index != deleteIndex));
   };
   const [show, setShow] = useState("none");
+  const [move, setMove] = useState(false);
+
   // console.log(navigation.navigate('Notifications'))
   return (
     <View style={styles.mainContainer}>
       <View style={styles.firstRow}>
-        <View style={styles.topContainer}>
+        {/* <View style={styles.topContainer}>
           <View style={styles.titleIcons}>
             <TouchableOpacity
               onPress={() => navigation.navigate("Notifications")}
@@ -51,7 +54,7 @@ const Bill = ({ navigation, route }) => {
               <FontAwesome5Icons name="times" style={styles.titleIcon} />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
       </View>
       <View style={styles.secondRow}></View>
       <View style={styles.column}>
@@ -95,13 +98,10 @@ const Bill = ({ navigation, route }) => {
         <TouchableOpacity
           style={styles.paymentbutton}
           activeOpacity={0.5}
-          onPress={() =>
-            navigation.navigate("BookingSuccess", {
-              payment: "visa",
-              appId: route.params.appId,
-              doctorId: route.params.doctorId,
-            })
-          }
+          onPress={() => {
+            setShow("flex");
+
+          }}
         >
           <Image source={visa} style={styles.visaimg} />
         </TouchableOpacity>
@@ -112,14 +112,24 @@ const Bill = ({ navigation, route }) => {
           activeOpacity={0.5}
           onPress={() =>
             navigation.navigate("BookingSuccess", {
-                payment: "cash",
-                appId: route.params.appId,
-                doctorId: route.params.doctorId,
+              payment: "cash",
+              appId: route.params.appId,
+              doctorId: route.params.doctorId,
             })
           }
         >
           <Image source={cash} style={styles.cashimg} />
         </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          display: show,
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+        }}
+      >
+        <Visa fun={setShow} setMove={setMove} navigation={navigation} route={route}/>
       </View>
     </View>
   );
