@@ -1,7 +1,10 @@
 # SoftwareProject
+
 outer clinic app in react native and php
 
-# Project Name: Clinic
+# Project Name: 
+
+Clinic
 
 # Project Description:
 
