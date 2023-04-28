@@ -14,10 +14,10 @@ On the doctor's side, they can easily reach their patients and see their informa
 
 # Features:
 
-Appointment booking
-Medical history management
-Communication between doctors and patients
-Appointment cancellation and rescheduling
-Prescription writing
-Financial management
-Lab test sending
+Appointment booking,
+Medical history management,
+Communication between doctors and patients,
+Appointment cancellation and rescheduling,
+Prescription writing,
+Financial management,
+Lab test sending,
